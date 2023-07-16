@@ -1,6 +1,7 @@
 import './style/App.css'
 import { AudioPlayer } from './components/AudioPlayer.js'
 import { PlayList } from './components/Playlist.js'
+import { NavMenu } from './components/NavMenu.js'
 
 function App() {
   return (
@@ -16,25 +17,7 @@ function App() {
               <span className="burger__line"></span>
               <span className="burger__line"></span>
             </div>
-            <div className="nav__menu menu">
-              <ul className="menu__list">
-                <li className="menu__item">
-                  <a href="http://" className="menu__link">
-                    Главное
-                  </a>
-                </li>
-                <li className="menu__item">
-                  <a href="http://" className="menu__link">
-                    Мой плейлист
-                  </a>
-                </li>
-                <li className="menu__item">
-                  <a href="http://" className="menu__link">
-                    Войти
-                  </a>
-                </li>
-              </ul>
-            </div>
+            <NavMenu />
           </nav>
           <div className="main__centerblock centerblock">
             <div className="centerblock__search search">

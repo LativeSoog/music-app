@@ -16,12 +16,12 @@ export function Track(props) {
           </div>
         </div>
         <div className="track__author">
-          <a className="track__author-link" href="http://">
+          <a className="track__author-link" href={props.link}>
             {props.author}
           </a>
         </div>
         <div className="track__album">
-          <a className="track__album-link" href="http://">
+          <a className="track__album-link" href={props.link}>
             {props.album}
           </a>
         </div>
