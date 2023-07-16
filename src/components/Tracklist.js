@@ -1,6 +1,6 @@
 import { Track } from './Track.js'
 
-export function PlayList(props) {
+export function TrackList(props) {
   return (
     <div className="content__playlist playlist">
       <Track

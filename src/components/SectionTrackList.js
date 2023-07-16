@@ -1,4 +1,4 @@
-import { PlayList } from './Playlist.js'
+import { TrackList } from './Tracklist.js'
 import { SearchLine } from './SearchLine.js'
 import { SearchTrack } from './SearchTrack.js'
 
@@ -19,7 +19,7 @@ export function SectionTrackList(props) {
             </svg>
           </div>
         </div>
-        <PlayList />
+        <TrackList />
       </div>
     </div>
   )
