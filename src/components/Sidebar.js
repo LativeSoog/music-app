@@ -1,3 +1,5 @@
+import { PlayLists } from './Playlists.js'
+
 export function Sidebar(props) {
   return (
     <div className="main__sidebar sidebar">
@@ -7,33 +9,21 @@ export function Sidebar(props) {
       </div>
       <div className="sidebar__block">
         <div className="sidebar__list">
-          <div className="sidebar__item">
-            <a className="sidebar__link" href="#">
-              <img
-                className="sidebar__img"
-                src="img/playlist01.png"
-                alt="day's playlist"
-              ></img>
-            </a>
-          </div>
-          <div className="sidebar__item">
-            <a className="sidebar__link" href="#">
-              <img
-                className="sidebar__img"
-                src="img/playlist02.png"
-                alt="day's playlist"
-              ></img>
-            </a>
-          </div>
-          <div className="sidebar__item">
-            <a className="sidebar__link" href="#">
-              <img
-                className="sidebar__img"
-                src="img/playlist03.png"
-                alt="day's playlist"
-              ></img>
-            </a>
-          </div>
+          <PlayLists
+            link=""
+            urlImg="img/playlist01.png"
+            altImg="day's playlist"
+          />
+          <PlayLists
+            link=""
+            urlImg="img/playlist02.png"
+            altImg="day's playlist"
+          />
+          <PlayLists
+            link=""
+            urlImg="img/playlist03.png"
+            altImg="day's playlist"
+          />
         </div>
       </div>
     </div>
