@@ -11,7 +11,7 @@ function App() {
         <main className="main">
           <NavMenu />
           <SectionTrackList />
-          <Sidebar />
+          <Sidebar personalName="Sergey.Ivanov" />
         </main>
         <AudioPlayer />
         <footer className="footer"></footer>
