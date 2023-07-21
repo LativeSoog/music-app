@@ -1,4 +1,4 @@
-export function Track(props) {
+export function Track({ title, titleSpan, link, author, album, time }) {
   return (
     <div className="playlist__item">
       <div className="playlist__track track">
@@ -9,27 +9,26 @@ export function Track(props) {
             </svg>
           </div>
           <div className="track__title-text">
-            <a className="track__title-link" href={props.link}>
-              {props.title}{' '}
-              <span className="track__title-span">{props.titleSpan}</span>
+            <a className="track__title-link" href={link}>
+              {title} <span className="track__title-span">{titleSpan}</span>
             </a>
           </div>
         </div>
         <div className="track__author">
-          <a className="track__author-link" href={props.link}>
-            {props.author}
+          <a className="track__author-link" href={link}>
+            {author}
           </a>
         </div>
         <div className="track__album">
-          <a className="track__album-link" href={props.link}>
-            {props.album}
+          <a className="track__album-link" href={link}>
+            {album}
           </a>
         </div>
         <div className="track__time">
           <svg className="track__time-svg" alt="time">
             <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
           </svg>
-          <span className="track__time-text">{props.time}</span>
+          <span className="track__time-text">{time}</span>
         </div>
       </div>
     </div>
