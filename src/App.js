@@ -2,7 +2,7 @@ import './style/App.css'
 import { NavMenu } from './components/NavMenu.js'
 import { AudioPlayer } from './components/AudioPlayer/AudioPlayer.js'
 import { SectionTrackList } from './components/SectionTrackList.js'
-import { Sidebar } from './components/Sidebar.js'
+import { Sidebar } from './components/Sidebar/Sidebar.js'
 import { useEffect, useState } from 'react'
 
 function App() {
