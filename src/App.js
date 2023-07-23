@@ -11,7 +11,7 @@ function App() {
     const timer = setTimeout(() => {
       setLoadingApp(true)
     }, 2000)
-  })
+  }, [])
 
   return (
     <div className="wrapper">
