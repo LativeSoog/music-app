@@ -1,0 +1,125 @@
+.track-play {
+  &__contain {
+    width: auto;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas: 'image author' 'image album';
+    align-items: center;
+  }
+
+  &__image {
+    width: 51px;
+    height: 51px;
+    background-color: #313131;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    grid-area: image;
+  }
+
+  &__svg {
+    width: 18px;
+    height: 17px;
+    fill: transparent;
+    stroke: #4e4e4e;
+  }
+
+  &__author {
+    grid-area: author;
+    min-width: 49px;
+
+    &_skeleton {
+      width: 59px;
+      height: 15px;
+      background-color: #313131;
+    }
+  }
+
+  &__author-link {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #ffffff;
+    white-space: nowrap;
+  }
+
+  &__album {
+    grid-area: album;
+    min-width: 49px;
+
+    &_skeleton {
+      width: 59px;
+      height: 15px;
+      background-color: #313131;
+    }
+  }
+
+  &__album-link {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 24px;
+    color: #ffffff;
+  }
+
+  &__like-dis {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 26%;
+  }
+
+  &__like,
+  &__dislike {
+    padding: 5px;
+  }
+
+  &__like-svg {
+    width: 14px;
+    height: 12px;
+    fill: transparent;
+    stroke: #696969;
+  }
+
+  &__dislike {
+    margin-left: 28.5px;
+  }
+
+  &__dislike-svg {
+    width: 14.34px;
+    height: 13px;
+    fill: transparent;
+    stroke: #696969;
+  }
+}
+
+.volume {
+  &__content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+  }
+
+  &__image {
+    width: 13px;
+    height: 18px;
+    margin-right: 17px;
+  }
+
+  &__svg {
+    width: 13px;
+    height: 18px;
+    fill: transparent;
+  }
+
+  &__progress {
+    width: 109px;
+  }
+
+  &__progress-line {
+    width: 109px;
+  }
+}

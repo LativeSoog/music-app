@@ -539,6 +539,11 @@ body {
   grid-area: author;
   min-width: 49px;
 }
+.track-play__author_skeleton {
+  width: 59px;
+  height: 15px;
+  background-color: #313131;
+}
 .track-play__author-link {
   font-style: normal;
   font-weight: 400;
@@ -550,6 +555,11 @@ body {
 .track-play__album {
   grid-area: album;
   min-width: 49px;
+}
+.track-play__album_skeleton {
+  width: 59px;
+  height: 15px;
+  background-color: #313131;
 }
 .track-play__album-link {
   font-style: normal;

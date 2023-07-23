@@ -1,4 +1,4 @@
-export function AudioPlayer(props) {
+export function AudioPlayer(props, loadApp) {
   return (
     <div className="bar">
       <div className="bar__content">
@@ -34,23 +34,27 @@ export function AudioPlayer(props) {
             </div>
 
             <div className="player__track-play track-play">
-              <div className="track-play__contain">
-                <div className="track-play__image">
-                  <svg className="track-play__svg" alt="music">
-                    <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
-                  </svg>
+              {props.loadApp ? (
+                <div className="track-play__contain">
+                  <div className="track-play__image">
+                    <svg className="track-play__svg" alt="music">
+                      <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
+                    </svg>
+                  </div>
+                  <div className="track-play__author">
+                    <a className="track-play__author-link" href="http://">
+                      Ты та...
+                    </a>
+                  </div>
+                  <div className="track-play__album">
+                    <a className="track-play__album-link" href="http://">
+                      Баста
+                    </a>
+                  </div>
                 </div>
-                <div className="track-play__author">
-                  <a className="track-play__author-link" href="http://">
-                    Ты та...
-                  </a>
-                </div>
-                <div className="track-play__album">
-                  <a className="track-play__album-link" href="http://">
-                    Баста
-                  </a>
-                </div>
-              </div>
+              ) : (
+                <AudioPlayerLoading />
+              )}
 
               <div className="track-play__like-dis">
                 <div className="track-play__like _btn-icon">
@@ -84,6 +88,16 @@ export function AudioPlayer(props) {
           </div>
         </div>
       </div>
+    </div>
+  )
+}
+
+function AudioPlayerLoading() {
+  return (
+    <div className="track-play__contain">
+      <div className="track-play__image"></div>
+      <div className="track-play__author_skeleton"></div>
+      <div className="track-play__album_skeleton"></div>
     </div>
   )
 }
