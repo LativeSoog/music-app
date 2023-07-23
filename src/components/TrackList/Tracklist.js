@@ -1,6 +1,6 @@
-import { Track } from './Track.js'
+import { Track, TrackLoading } from './Track.js'
 
-export function TrackList({ title, titleSpan, link, author, album, time }) {
+export function TrackList(props) {
   return (
     <div className="content__playlist playlist">
       <Track
@@ -91,6 +91,23 @@ export function TrackList({ title, titleSpan, link, author, album, time }) {
         album="Soundz Made in Romania"
         time="3:36"
       />
+    </div>
+  )
+}
+
+export function TrackListLoading(props) {
+  return (
+    <div className="content__playlist playlist">
+      <TrackLoading />
+      <TrackLoading />
+      <TrackLoading />
+      <TrackLoading />
+      <TrackLoading />
+      <TrackLoading />
+      <TrackLoading />
+      <TrackLoading />
+      <TrackLoading />
+      <TrackLoading />
     </div>
   )
 }

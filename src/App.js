@@ -1,7 +1,7 @@
 import './style/App.css'
 import { NavMenu } from './components/NavMenu.js'
 import { AudioPlayer } from './components/AudioPlayer/AudioPlayer.js'
-import { SectionTrackList } from './components/SectionTrackList.js'
+import { SectionTrackList } from './components/TrackList/SectionTrackList.js'
 import { Sidebar } from './components/Sidebar/Sidebar.js'
 import { useEffect, useState } from 'react'
 
@@ -18,7 +18,7 @@ function App() {
       <div className="container">
         <main className="main">
           <NavMenu />
-          <SectionTrackList />
+          <SectionTrackList loadApp={loadApp} />
           <Sidebar loadApp={loadApp} personalName="Sergey.Ivanov" />
         </main>
         <AudioPlayer loadApp={loadApp} />
