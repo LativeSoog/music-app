@@ -245,31 +245,6 @@ body {
     }
   }
 }
-
-.filter {
-  &__title {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
-    margin-right: 15px;
-  }
-
-  &__button {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
-    border: 1px solid #ffffff;
-    border-radius: 60px;
-    padding: 6px 20px;
-
-    &:not(:last-child) {
-      margin-right: 10px;
-    }
-  }
-}
-
 @keyframes appLoading {
   0% {
     background-color: #313131;
@@ -291,3 +266,4 @@ body {
 @import '../components/AudioPlayer/AudioPlayer.scss';
 @import '../components/Sidebar/sidebar.scss';
 @import '../components/TrackList/tracklist.scss';
+@import '../components/SearchTrack/searchtrack.scss';
