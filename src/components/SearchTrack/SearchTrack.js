@@ -48,10 +48,10 @@ const GenreTrack = () => {
 }
 
 export function SearchTrack(props) {
-  const [filter, setFilter] = useState(false)
+  const [filter, setFilter] = useState(null)
   const filterButton = (userFilter) => {
     if (filter === userFilter) {
-      setFilter(false)
+      setFilter(null)
     } else setFilter(userFilter)
   }
   return (
