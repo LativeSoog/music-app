@@ -1,8 +1,8 @@
-import { TrackList } from './Tracklist.js'
-import { SearchLine } from './SearchLine.js'
-import { SearchTrack } from './SearchTrack.js'
+import { TrackList, TrackListLoading } from './Tracklist.js'
+import { SearchLine } from '../SearchLine.js'
+import { SearchTrack } from '../SearchTrack/SearchTrack.js'
 
-export function SectionTrackList(props) {
+export function SectionTrackList({ loadApp }) {
   return (
     <div className="main__centerblock centerblock">
       <SearchLine />
@@ -19,7 +19,7 @@ export function SectionTrackList(props) {
             </svg>
           </div>
         </div>
-        <TrackList />
+        {loadApp ? <TrackList /> : <TrackListLoading />}
       </div>
     </div>
   )

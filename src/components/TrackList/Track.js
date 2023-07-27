@@ -34,3 +34,18 @@ export function Track({ title, titleSpan, link, author, album, time }) {
     </div>
   )
 }
+
+export function TrackLoading() {
+  return (
+    <div className="playlist__item">
+      <div className="playlist__track track">
+        <div className="track__title">
+          <div className="track__title-image track__title-image_skeleton"></div>
+          <div className="track__title-text_skeleton"></div>
+        </div>
+        <div className="track__author_skeleton"></div>
+        <div className="track__album_skeleton"></div>
+      </div>
+    </div>
+  )
+}
