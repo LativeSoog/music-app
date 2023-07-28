@@ -1,13 +1,15 @@
+import * as S from '../Sidebar/style.jsx'
+
 export function PlayLists({ link, urlImg, altImg }) {
   return (
-    <div className="sidebar__item">
-      <a className="sidebar__link" href={link}>
-        <img className="sidebar__img" src={urlImg} alt={altImg}></img>
-      </a>
-    </div>
+    <S.SidebarItem>
+      <S.SidebarLink href={link}>
+        <S.SidebarImg src={urlImg} alt={altImg}></S.SidebarImg>
+      </S.SidebarLink>
+    </S.SidebarItem>
   )
 }
 
 export function PlayListsLoading() {
-  return <div className="sidebar__item_skeleton"></div>
+  return <S.SidebarItemSkeleton></S.SidebarItemSkeleton>
 }
