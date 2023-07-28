@@ -101,8 +101,6 @@ body {
   flex-grow: 3;
   padding: 20px 40px 20px 111px;
 }
-.main__sidebar {
-}
 
 .centerblock__search {
   width: 100%;
@@ -385,13 +383,6 @@ body {
 .player__track-play {
   display: flex;
   flex-direction: row;
-}
-
-
-
-/* ВНИМАНИЕ! НЕ ПЕРЕНЕСËН СТИЛЬ!!! */
-.sidebar__item:not(:last-child) {
-  margin-bottom: 30px;
 }
 
 
