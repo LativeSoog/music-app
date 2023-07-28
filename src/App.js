@@ -1,5 +1,5 @@
 import './style/App.css'
-import { NavMenu } from './components/NavMenu.js'
+import { NavMenu } from './components/NavMenu/NavMenu.js'
 import { AudioPlayer } from './components/AudioPlayer/AudioPlayer.js'
 import { SectionTrackList } from './components/TrackList/SectionTrackList.js'
 import { Sidebar } from './components/Sidebar/Sidebar.js'
