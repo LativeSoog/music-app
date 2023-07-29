@@ -1,6 +1,6 @@
 import { TrackList, TrackListLoading } from './Tracklist.js'
 import { SearchLine } from '../SearchLine.js'
-import { SearchTrack } from '../SearchTrack/SearchTrack.js'
+import { SearchTrack } from '../FilterTrack/FilterTrack.js'
 
 export function SectionTrackList({ loadApp }) {
   return (

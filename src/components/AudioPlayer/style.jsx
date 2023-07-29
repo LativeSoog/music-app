@@ -7,19 +7,15 @@ const playerBtnMixin = css`
 `
 
 const btnIconHoverMixin = css`
-  :hover {
-    fill: transparent;
-    stroke: #acacac;
-    cursor: pointer;
-  }
+  fill: transparent;
+  stroke: #acacac;
+  cursor: pointer;
 `
 
 const btnIconActiveMixin = css`
-  :active {
-    fill: #696969;
-    stroke: #ffffff;
-    cursor: pointer;
-  }
+  fill: #696969;
+  stroke: #ffffff;
+  cursor: pointer;
 `
 
 export const Bar = styled.div`
@@ -98,8 +94,14 @@ export const PlayerBtnNextSvg = styled.svg`
 export const PlayerBtnRepeat = styled.div`
   ${playerBtnMixin};
   margin-right: 24px;
-  ${btnIconHoverMixin};
-  ${btnIconActiveMixin}
+
+  &:hover {
+    ${btnIconHoverMixin};
+  }
+
+  &:active {
+    ${btnIconActiveMixin}
+  }
 `
 
 export const PlayerBtnRepeatSvg = styled.svg`
@@ -113,8 +115,14 @@ export const PlayerBtnSnuffle = styled.div`
   ${playerBtnMixin};
   display: flex;
   align-items: center;
-  ${btnIconHoverMixin};
-  ${btnIconActiveMixin}
+
+  &:hover {
+    ${btnIconHoverMixin};
+  }
+
+  &:active {
+    ${btnIconActiveMixin}
+  }
 `
 
 export const PlayerBtnSnuffleSvg = styled.svg`
@@ -227,8 +235,14 @@ export const TrackPlayLikeDis = styled.div`
 
 export const TrackPlayLike = styled.div`
   padding: 5px;
-  ${btnIconHoverMixin};
-  ${btnIconActiveMixin};
+
+  &:hover {
+    ${btnIconHoverMixin};
+  }
+
+  &:active {
+    ${btnIconActiveMixin}
+  }
 `
 
 export const TrackPlayLikeSvg = styled.svg`
@@ -240,8 +254,14 @@ export const TrackPlayLikeSvg = styled.svg`
 
 export const TrackPlayDislike = styled.div`
   margin-left: 28.5px;
-  ${btnIconHoverMixin};
-  ${btnIconActiveMixin};
+
+  &:hover {
+    ${btnIconHoverMixin};
+  }
+
+  &:active {
+    ${btnIconActiveMixin}
+  }
 `
 
 export const TrackPlayDislikeSvg = styled.svg`
