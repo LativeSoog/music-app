@@ -96,25 +96,6 @@ body {
   justify-content: space-between;
 }
 
-.main__centerblock {
-}
-
-.centerblock__search {
-}
-.centerblock__h2 {
-}
-
-.centerblock__content {
-}
-
-.search__svg {
-}
-.search__text {
-}
-.search__text::-moz-placeholder {
-}
-.search__text::placeholder {
-}
 
 @keyframes appLoading {
   0% {
@@ -134,62 +115,5 @@ body {
   }
 }
 
-.content__title {
-}
-.content__playlist {
-}
-
-.playlist-title__col {
-}
-.playlist-title__svg {
-}
-
-.col01 {
-}
-
-.col02 {
-}
-
-.col03 {
-}
-
-.col04 {
-}
-
-.playlist__item {
-}
-.playlist__track {
-}
-
-.track__title {
-}
-.track__title-image {
-}
-.track__title-image_skeleton {
-}
-.track__title-svg {
-}
-.track__title-text_skeleton {
-}
-.track__title-link {
-}
-.track__title-span {
-}
-.track__author {
-}
-.track__author_skeleton {
-}
-.track__author-link {
-}
-.track__album {
-}
-.track__album_skeleton {
-}
-.track__album-link {
-}
-.track__time-svg {
-}
-.track__time-text {
-}
 
 /*# sourceMappingURL=App.css.map */

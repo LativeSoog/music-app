@@ -7,15 +7,19 @@ const playerBtnMixin = css`
 `
 
 const btnIconHoverMixin = css`
-  fill: transparent;
-  stroke: #acacac;
-  cursor: pointer;
+  :hover {
+    fill: transparent;
+    stroke: #acacac;
+    cursor: pointer;
+  }
 `
 
 const btnIconActiveMixin = css`
-  fill: #696969;
-  stroke: #ffffff;
-  cursor: pointer;
+  :active {
+    fill: #696969;
+    stroke: #ffffff;
+    cursor: pointer;
+  }
 `
 
 export const Bar = styled.div`
