@@ -1,15 +1,16 @@
+import * as S from './style.jsx'
+
 export function SearchLine(props) {
   return (
-    <div className="centerblock__search search">
-      <svg className="search__svg">
+    <S.CenterblockSearch>
+      <S.SearchSvg>
         <use xlinkHref="img/icon/sprite.svg#icon-search"></use>
-      </svg>
-      <input
-        className="search__text"
+      </S.SearchSvg>
+      <S.SearchText
         type="search"
         placeholder="Поиск"
         name="search"
-      ></input>
-    </div>
+      ></S.SearchText>
+    </S.CenterblockSearch>
   )
 }

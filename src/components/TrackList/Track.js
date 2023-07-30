@@ -1,51 +1,49 @@
+import * as S from './style.jsx'
+
 export function Track({ title, titleSpan, link, author, album, time }) {
   return (
-    <div className="playlist__item">
-      <div className="playlist__track track">
-        <div className="track__title">
-          <div className="track__title-image">
-            <svg className="track__title-svg" alt="music">
+    <S.PlaylistItem>
+      <S.PlaylistTrack>
+        <S.TrackTitle>
+          <S.TrackTitleImage>
+            <S.TrackTitleSvg alt="music">
               <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
-            </svg>
-          </div>
-          <div className="track__title-text">
-            <a className="track__title-link" href={link}>
-              {title} <span className="track__title-span">{titleSpan}</span>
-            </a>
-          </div>
-        </div>
-        <div className="track__author">
-          <a className="track__author-link" href={link}>
-            {author}
-          </a>
-        </div>
-        <div className="track__album">
-          <a className="track__album-link" href={link}>
-            {album}
-          </a>
-        </div>
-        <div className="track__time">
-          <svg className="track__time-svg" alt="time">
+            </S.TrackTitleSvg>
+          </S.TrackTitleImage>
+          <S.TrackTitleText>
+            <S.TrackTitleLink href={link}>
+              {title} <S.TrackTitleSpan>{titleSpan}</S.TrackTitleSpan>
+            </S.TrackTitleLink>
+          </S.TrackTitleText>
+        </S.TrackTitle>
+        <S.TrackAuthor>
+          <S.TrackAuthorLink href={link}>{author}</S.TrackAuthorLink>
+        </S.TrackAuthor>
+        <S.TrackAlbum>
+          <S.TrackAlbumLink href={link}>{album}</S.TrackAlbumLink>
+        </S.TrackAlbum>
+        <S.TrackTime>
+          <S.TrackTimeSvg alt="time">
             <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
-          </svg>
-          <span className="track__time-text">{time}</span>
-        </div>
-      </div>
-    </div>
+          </S.TrackTimeSvg>
+          <S.TrackTimeText>{time}</S.TrackTimeText>
+        </S.TrackTime>
+      </S.PlaylistTrack>
+    </S.PlaylistItem>
   )
 }
 
 export function TrackLoading() {
   return (
-    <div className="playlist__item">
-      <div className="playlist__track track">
-        <div className="track__title">
-          <div className="track__title-image track__title-image_skeleton"></div>
-          <div className="track__title-text_skeleton"></div>
-        </div>
-        <div className="track__author_skeleton"></div>
-        <div className="track__album_skeleton"></div>
-      </div>
-    </div>
+    <S.PlaylistItem>
+      <S.PlaylistTrack>
+        <S.TrackTitle>
+          <S.TrackTitleImageSkeleton></S.TrackTitleImageSkeleton>
+          <S.TrackTitleTextSkeleton></S.TrackTitleTextSkeleton>
+        </S.TrackTitle>
+        <S.TrackAuthorSkeleton></S.TrackAuthorSkeleton>
+        <S.TrackAlbumSkeleton></S.TrackAlbumSkeleton>
+      </S.PlaylistTrack>
+    </S.PlaylistItem>
   )
 }

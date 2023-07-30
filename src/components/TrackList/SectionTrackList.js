@@ -1,26 +1,27 @@
 import { TrackList, TrackListLoading } from './Tracklist.js'
-import { SearchLine } from '../SearchLine.js'
+import { SearchLine } from './SearchLine.js'
 import { SearchTrack } from '../FilterTrack/FilterTrack.js'
+import * as S from './style.jsx'
 
 export function SectionTrackList({ loadApp }) {
   return (
-    <div className="main__centerblock centerblock">
+    <S.MainCenterBlock>
       <SearchLine />
-      <h2 className="centerblock__h2">Треки</h2>
+      <S.CenterBlockH2>Треки</S.CenterBlockH2>
       <SearchTrack />
-      <div className="centerblock__content">
-        <div className="content__title playlist-title">
-          <div className="playlist-title__col col01">Трек</div>
-          <div className="playlist-title__col col02">ИСПОЛНИТЕЛЬ</div>
-          <div className="playlist-title__col col03">АЛЬБОМ</div>
-          <div className="playlist-title__col col04">
-            <svg className="playlist-title__svg" alt="time">
+      <S.CenterBlockContent>
+        <S.ContentTitle>
+          <S.ContentCol1>Трек</S.ContentCol1>
+          <S.ContentCol2>ИСПОЛНИТЕЛЬ</S.ContentCol2>
+          <S.ContentCol3>АЛЬБОМ</S.ContentCol3>
+          <S.ContentCol4>
+            <S.PlaylistTitleSvg alt="time">
               <use xlinkHref="img/icon/sprite.svg#icon-watch"></use>
-            </svg>
-          </div>
-        </div>
+            </S.PlaylistTitleSvg>
+          </S.ContentCol4>
+        </S.ContentTitle>
         {loadApp ? <TrackList /> : <TrackListLoading />}
-      </div>
-    </div>
+      </S.CenterBlockContent>
+    </S.MainCenterBlock>
   )
 }
