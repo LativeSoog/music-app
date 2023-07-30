@@ -4,6 +4,7 @@ import { AudioPlayer } from './components/AudioPlayer/AudioPlayer.js'
 import { SectionTrackList } from './components/TrackList/SectionTrackList.js'
 import { Sidebar } from './components/Sidebar/Sidebar.js'
 import { useEffect, useState } from 'react'
+import * as S from './style/AppStyle.jsx'
 
 function App() {
   const [loadApp, setLoadingApp] = useState(false)
@@ -15,17 +16,17 @@ function App() {
   }, [])
 
   return (
-    <div className="wrapper">
-      <div className="container">
-        <main className="main">
+    <S.Wrapper>
+      <S.Container>
+        <S.Main>
           <NavMenu />
           <SectionTrackList loadApp={loadApp} />
           <Sidebar loadApp={loadApp} personalName="Sergey.Ivanov" />
-        </main>
+        </S.Main>
         <AudioPlayer loadApp={loadApp} />
-        <footer className="footer"></footer>
-      </div>
-    </div>
+        <S.Footer></S.Footer>
+      </S.Container>
+    </S.Wrapper>
   )
 }
 
