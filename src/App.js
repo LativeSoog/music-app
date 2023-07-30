@@ -1,4 +1,3 @@
-import './style/App.css'
 import { NavMenu } from './components/NavMenu/NavMenu.js'
 import { AudioPlayer } from './components/AudioPlayer/AudioPlayer.js'
 import { SectionTrackList } from './components/TrackList/SectionTrackList.js'
