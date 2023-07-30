@@ -7,19 +7,37 @@ const playerBtnMixin = css`
 `
 
 const btnIconHoverMixin = css`
-  :hover {
-    fill: transparent;
-    stroke: #acacac;
-    cursor: pointer;
-  }
+  fill: transparent;
+  stroke: #acacac;
+  cursor: pointer;
 `
 
 const btnIconActiveMixin = css`
-  :active {
-    fill: #696969;
-    stroke: #ffffff;
-    cursor: pointer;
+  fill: #696969;
+  stroke: #ffffff;
+  cursor: pointer;
+`
+
+const animationSkeletonMixin = css`
+  @keyframes appLoading {
+    0% {
+      background-color: #313131;
+    }
+    25% {
+      background-color: #4e4e4e;
+    }
+    50% {
+      background-color: #313131;
+    }
+    75% {
+      background-color: #4e4e4e;
+    }
+    100% {
+      background-color: #4e4e4e;
+    }
   }
+
+  animation: appLoading 3s ease-in-out;
 `
 
 export const Bar = styled.div`
@@ -99,11 +117,11 @@ export const PlayerBtnRepeat = styled.div`
   ${playerBtnMixin};
   margin-right: 24px;
 
-  &:hover {
+  :hover {
     ${btnIconHoverMixin};
   }
 
-  &:active {
+  :active {
     ${btnIconActiveMixin}
   }
 `
@@ -120,11 +138,11 @@ export const PlayerBtnSnuffle = styled.div`
   display: flex;
   align-items: center;
 
-  &:hover {
+  :hover {
     ${btnIconHoverMixin};
   }
 
-  &:active {
+  :active {
     ${btnIconActiveMixin}
   }
 `
@@ -240,11 +258,11 @@ export const TrackPlayLikeDis = styled.div`
 export const TrackPlayLike = styled.div`
   padding: 5px;
 
-  &:hover {
+  :hover {
     ${btnIconHoverMixin};
   }
 
-  &:active {
+  :active {
     ${btnIconActiveMixin}
   }
 `
@@ -259,11 +277,11 @@ export const TrackPlayLikeSvg = styled.svg`
 export const TrackPlayDislike = styled.div`
   margin-left: 28.5px;
 
-  &:hover {
+  :hover {
     ${btnIconHoverMixin};
   }
 
-  &:active {
+  :active {
     ${btnIconActiveMixin}
   }
 `
@@ -278,7 +296,7 @@ export const TrackPlayDislikeSvg = styled.svg`
 export const TrackPlayAuthorSkeleton = styled.div`
   width: 59px;
   height: 15px;
-  animation: appLoading 3s ease-in-out;
+  ${animationSkeletonMixin}
 `
 export const TrackPlayAlbumSkeleton = styled.div`
   width: 59px;
