@@ -16,17 +16,20 @@ function App() {
   }, [])
 
   return (
-    <S.Wrapper>
-      <S.Container>
-        <S.Main>
-          <NavMenu />
-          <SectionTrackList loadApp={loadApp} />
-          <Sidebar loadApp={loadApp} personalName="Sergey.Ivanov" />
-        </S.Main>
-        <AudioPlayer loadApp={loadApp} />
-        <S.Footer></S.Footer>
-      </S.Container>
-    </S.Wrapper>
+    <>
+      <S.StyLeGlobal />
+      <S.Wrapper>
+        <S.Container>
+          <S.Main>
+            <NavMenu />
+            <SectionTrackList loadApp={loadApp} />
+            <Sidebar loadApp={loadApp} personalName="Sergey.Ivanov" />
+          </S.Main>
+          <AudioPlayer loadApp={loadApp} />
+          <S.Footer></S.Footer>
+        </S.Container>
+      </S.Wrapper>
+    </>
   )
 }
 
