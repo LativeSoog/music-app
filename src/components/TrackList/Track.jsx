@@ -1,4 +1,4 @@
-import * as S from './style.jsx'
+import * as S from './style.js'
 
 export function Track({ title, titleSpan, link, author, album, time }) {
   return (

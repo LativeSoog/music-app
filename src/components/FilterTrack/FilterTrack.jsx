@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import * as S from './style.jsx'
+import * as S from './style.js'
 
 const AuthorsTrack = () => {
   return (

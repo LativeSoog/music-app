@@ -1,9 +1,9 @@
-import { NavMenu } from './components/NavMenu/NavMenu.js'
-import { AudioPlayer } from './components/AudioPlayer/AudioPlayer.js'
-import { SectionTrackList } from './components/TrackList/SectionTrackList.js'
-import { Sidebar } from './components/Sidebar/Sidebar.js'
+import { NavMenu } from './components/NavMenu/NavMenu.jsx'
+import { AudioPlayer } from './components/AudioPlayer/AudioPlayer.jsx'
+import { SectionTrackList } from './components/TrackList/SectionTrackList.jsx'
+import { Sidebar } from './components/Sidebar/Sidebar.jsx'
 import { useEffect, useState } from 'react'
-import * as S from './style/AppStyle.jsx'
+import * as S from './style/AppStyle.js'
 
 function App() {
   const [loadApp, setLoadingApp] = useState(false)

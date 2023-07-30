@@ -1,4 +1,4 @@
-import * as S from '../Sidebar/style.jsx'
+import * as S from './style.js'
 
 export function PlayLists({ link, urlImg, altImg }) {
   return (

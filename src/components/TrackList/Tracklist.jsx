@@ -1,5 +1,5 @@
 import { styled } from 'styled-components'
-import { Track, TrackLoading } from './Track.js'
+import { Track, TrackLoading } from './Track.jsx'
 
 const StyledContentPlaylist = styled.div`
   display: flex;

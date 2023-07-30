@@ -1,4 +1,4 @@
-import * as S from '../AudioPlayer/style.jsx'
+import * as S from './style.js'
 
 export function AudioPlayer(props, loadApp) {
   return (

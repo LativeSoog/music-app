@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import * as S from '../NavMenu/style.jsx'
+import * as S from './style.js'
 
 export function NavMenu(props) {
   const [visible, setVisible] = useState(false)

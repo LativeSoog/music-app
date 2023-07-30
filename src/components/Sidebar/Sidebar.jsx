@@ -1,5 +1,5 @@
-import { PlayLists, PlayListsLoading } from './Playlists.js'
-import * as S from '../Sidebar/style.jsx'
+import { PlayLists, PlayListsLoading } from './Playlists.jsx'
+import * as S from './style.js'
 
 export function Sidebar({ personalName, loadApp }) {
   return (
