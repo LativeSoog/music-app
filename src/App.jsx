@@ -4,6 +4,7 @@ import { SectionTrackList } from './components/TrackList/SectionTrackList.jsx'
 import { Sidebar } from './components/Sidebar/Sidebar.jsx'
 import { useEffect, useState } from 'react'
 import * as S from './style/AppStyle.js'
+import { AppRoutes } from './routes.js'
 
 function App() {
   const [loadApp, setLoadingApp] = useState(false)
@@ -19,6 +20,7 @@ function App() {
       <S.StyLeGlobal />
       <S.Wrapper>
         <S.Container>
+          <AppRoutes />
           <S.Main>
             <NavMenu />
             <SectionTrackList loadApp={loadApp} />
