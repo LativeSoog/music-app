@@ -1,8 +1,15 @@
-import { Track, TrackLoading } from './Track.js'
+import { styled } from 'styled-components'
+import { Track, TrackLoading } from './Track.jsx'
+
+const StyledContentPlaylist = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+`
 
 export function TrackList(props) {
   return (
-    <div className="content__playlist playlist">
+    <StyledContentPlaylist>
       <Track
         title="Guilt"
         titleSpan=""
@@ -91,13 +98,13 @@ export function TrackList(props) {
         album="Soundz Made in Romania"
         time="3:36"
       />
-    </div>
+    </StyledContentPlaylist>
   )
 }
 
 export function TrackListLoading(props) {
   return (
-    <div className="content__playlist playlist">
+    <StyledContentPlaylist>
       <TrackLoading />
       <TrackLoading />
       <TrackLoading />
@@ -108,6 +115,6 @@ export function TrackListLoading(props) {
       <TrackLoading />
       <TrackLoading />
       <TrackLoading />
-    </div>
+    </StyledContentPlaylist>
   )
 }

@@ -1,14 +1,15 @@
-import { PlayLists, PlayListsLoading } from './Playlists.js'
+import { PlayLists, PlayListsLoading } from './Playlists.jsx'
+import * as S from './style.js'
 
 export function Sidebar({ personalName, loadApp }) {
   return (
-    <div className="main__sidebar sidebar">
-      <div className="sidebar__personal">
-        <p className="sidebar__personal-name">{personalName}</p>
-        <div className="sidebar__avatar"></div>
-      </div>
-      <div className="sidebar__block">
-        <div className="sidebar__list">
+    <S.MainSidebar>
+      <S.SidebarPersonal>
+        <S.SidebarPersonalName>{personalName}</S.SidebarPersonalName>
+        <S.SidebarAvatar></S.SidebarAvatar>
+      </S.SidebarPersonal>
+      <S.SidebarBlock>
+        <S.SidebarList>
           {loadApp ? (
             <PlayLists
               link=""
@@ -36,8 +37,8 @@ export function Sidebar({ personalName, loadApp }) {
           ) : (
             <PlayListsLoading />
           )}
-        </div>
-      </div>
-    </div>
+        </S.SidebarList>
+      </S.SidebarBlock>
+    </S.MainSidebar>
   )
 }

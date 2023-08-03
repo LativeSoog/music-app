@@ -1,42 +1,41 @@
 import { useState } from 'react'
+import * as S from './style.js'
 
 export function NavMenu(props) {
   const [visible, setVisible] = useState(false)
   const toggleButton = () => setVisible(!visible)
 
   return (
-    <nav className="main__nav nav">
-      <div className="nav__logo logo">
-        <img className="logo__image" src="img/logo.png" alt="logo"></img>
-      </div>
-      <div className="nav__burger burger" onClick={toggleButton}>
+    <S.MainNav>
+      <S.NavLogo>
+        <S.LogoImage src="img/logo.png" alt="logo"></S.LogoImage>
+      </S.NavLogo>
+      <S.NavBurger onClick={toggleButton}>
         <NavBurger />
         <NavBurger />
         <NavBurger />
-      </div>
+      </S.NavBurger>
       {visible && (
-        <div className="nav__menu menu">
-          <ul className="menu__list">
+        <S.NavMenu>
+          <S.MenuList>
             <NavMenuItem link="http://" text="Главное" />
             <NavMenuItem link="http://" text="Мой плейлист" />
             <NavMenuItem link="http://" text="Войти" />
-          </ul>
-        </div>
+          </S.MenuList>
+        </S.NavMenu>
       )}
-    </nav>
+    </S.MainNav>
   )
 }
 
 function NavBurger(props) {
-  return <span className="burger__line">{props.text}</span>
+  return <S.BurgerLine>{props.text}</S.BurgerLine>
 }
 
 function NavMenuItem(props) {
   return (
-    <li className="menu__item">
-      <a href={props.link} className="menu__link">
-        {props.text}
-      </a>
-    </li>
+    <S.MenuItem>
+      <S.MenuLink href={props.link}>{props.text}</S.MenuLink>
+    </S.MenuItem>
   )
 }
