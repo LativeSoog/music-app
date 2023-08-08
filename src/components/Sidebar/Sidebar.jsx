@@ -1,3 +1,4 @@
+import { CATEGORIES } from '../../constants.js'
 import { PlayLists, PlayListsLoading } from './Playlists.jsx'
 import * as S from './style.js'
 
@@ -11,29 +12,16 @@ export function Sidebar({ personalName, loadApp }) {
       <S.SidebarBlock>
         <S.SidebarList>
           {loadApp ? (
-            <PlayLists
-              link=""
-              urlImg="img/playlist01.png"
-              altImg="day's playlist"
-            />
-          ) : (
-            <PlayListsLoading />
-          )}
-          {loadApp ? (
-            <PlayLists
-              link=""
-              urlImg="img/playlist02.png"
-              altImg="day's playlist"
-            />
-          ) : (
-            <PlayListsLoading />
-          )}
-          {loadApp ? (
-            <PlayLists
-              link=""
-              urlImg="img/playlist03.png"
-              altImg="day's playlist"
-            />
+            CATEGORIES.map((category) => {
+              return (
+                <PlayLists
+                  key={category.id}
+                  link={`/category/${category.id}`}
+                  urlImg={category.urlImg}
+                  altImg={category.altImg}
+                />
+              )
+            })
           ) : (
             <PlayListsLoading />
           )}
