@@ -18,9 +18,9 @@ export function NavMenu(props) {
       {visible && (
         <S.NavMenu>
           <S.MenuList>
-            <NavMenuItem link="http://" text="Главное" />
-            <NavMenuItem link="http://" text="Мой плейлист" />
-            <NavMenuItem link="http://" text="Войти" />
+            <NavMenuItem link="/" text="Главное" />
+            <NavMenuItem link="/favorites" text="Мой плейлист" />
+            <NavMenuItem link="/login" text="Войти" />
           </S.MenuList>
         </S.NavMenu>
       )}
@@ -35,7 +35,7 @@ function NavBurger(props) {
 function NavMenuItem(props) {
   return (
     <S.MenuItem>
-      <S.MenuLink href={props.link}>{props.text}</S.MenuLink>
+      <S.MenuLink to={props.link}>{props.text}</S.MenuLink>
     </S.MenuItem>
   )
 }
