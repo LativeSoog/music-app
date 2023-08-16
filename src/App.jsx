@@ -9,15 +9,15 @@ function App() {
   const [currentSong, setCurrentSong] = useState()
   const [trackListAll, setTrackListAll] = useState([])
 
-  try {
-    useEffect(() => {
+  useEffect(() => {
+    try {
       getAllTrack().then((trackList) => {
         setTrackListAll(trackList)
       })
-    }, [])
-  } catch (error) {
-    setIsErrorApp(true)
-  }
+    } catch (error) {
+      setIsErrorApp(true)
+    }
+  })
 
   return (
     <>
