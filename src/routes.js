@@ -7,7 +7,13 @@ import { FavoritesPage } from './pages/Favorites/FavoritesPage.jsx'
 import { CategoryPage } from './pages/Category/CategoryPage.jsx'
 import { ProtectedRoute } from './protectedRoute.js'
 
-export const AppRoutes = ({ user, currentSong, setCurrentSong }) => {
+export const AppRoutes = ({
+  user,
+  currentSong,
+  setCurrentSong,
+  trackListAll,
+  isErrorApp,
+}) => {
   return (
     <Routes>
       <Route path="*" element={<NotFoundPage />} />
@@ -20,6 +26,8 @@ export const AppRoutes = ({ user, currentSong, setCurrentSong }) => {
             <MainPage
               currentSong={currentSong}
               setCurrentSong={setCurrentSong}
+              trackListAll={trackListAll}
+              isErrorApp={isErrorApp}
             />
           }
         />

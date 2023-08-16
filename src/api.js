@@ -1,11 +1,15 @@
+const host = 'https://painassasin.online/'
+let catalog = ''
+
 export const getAllTrack = async () => {
-  const response = await fetch('https://painassasin.online/catalog/track/all/')
-
-  if (!response.ok) {
-    throw new Error('Произошла ошибка сервера')
-  }
-
-  const data = await response.json()
-
-  return data
+  let catalog = 'catalog/track/all/'
+  return fetch(host + catalog, {
+    method: 'GET',
+  }).then(async (response) => {
+    if (!response.ok) {
+      throw new Error('Ошибка сервера')
+    } else {
+      return await response.json()
+    }
+  })
 }

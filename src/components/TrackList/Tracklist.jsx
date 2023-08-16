@@ -1,7 +1,5 @@
 import { styled } from 'styled-components'
 import { Track, TrackLoading } from './Track.jsx'
-import { useEffect, useState } from 'react'
-import { getAllTrack } from '../../api.js'
 
 const StyledContentPlaylist = styled.div`
   display: flex;
@@ -9,15 +7,7 @@ const StyledContentPlaylist = styled.div`
   overflow-y: auto;
 `
 
-export function TrackList({ props, currentSong, setCurrentSong }) {
-  const [trackListAll, setTrackListAll] = useState([])
-
-  useEffect(() => {
-    getAllTrack().then((trackList) => {
-      setTrackListAll(trackList)
-    })
-  }, [])
-
+export function TrackList({ currentSong, setCurrentSong, trackListAll }) {
   return (
     <StyledContentPlaylist>
       {trackListAll.map((track) => {
