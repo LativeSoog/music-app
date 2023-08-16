@@ -3,7 +3,7 @@ import { SearchLine } from './SearchLine.jsx'
 import { SearchTrack } from '../FilterTrack/FilterTrack.jsx'
 import * as S from './style.js'
 
-export function SectionTrackList({ loadApp }) {
+export function SectionTrackList({ loadApp, currentSong, setCurrentSong }) {
   return (
     <S.MainCenterBlock>
       <SearchLine />
@@ -20,7 +20,14 @@ export function SectionTrackList({ loadApp }) {
             </S.PlaylistTitleSvg>
           </S.ContentCol4>
         </S.ContentTitle>
-        {loadApp ? <TrackList /> : <TrackListLoading />}
+        {loadApp ? (
+          <TrackList
+            currentSong={currentSong}
+            setCurrentSong={setCurrentSong}
+          />
+        ) : (
+          <TrackListLoading />
+        )}
       </S.CenterBlockContent>
     </S.MainCenterBlock>
   )

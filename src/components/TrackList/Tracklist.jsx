@@ -9,22 +9,22 @@ const StyledContentPlaylist = styled.div`
   overflow-y: auto;
 `
 
-export function TrackList(props) {
+export function TrackList({ props, currentSong, setCurrentSong }) {
   const [trackListAll, setTrackListAll] = useState([])
 
   useEffect(() => {
     getAllTrack().then((trackList) => {
       setTrackListAll(trackList)
-      console.log(trackList)
     })
   }, [])
-
 
   return (
     <StyledContentPlaylist>
       {trackListAll.map((track) => {
         return (
           <Track
+            currentSong={currentSong}
+            setCurrentSong={setCurrentSong}
             key={track.id}
             title={track.name}
             titleSpan=""
