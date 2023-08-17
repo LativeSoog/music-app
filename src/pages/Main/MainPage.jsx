@@ -5,7 +5,12 @@ import { SectionTrackList } from '../../components/TrackList/SectionTrackList.js
 import { Sidebar } from '../../components/Sidebar/Sidebar.jsx'
 import * as S from '../../style/AppStyle.js'
 
-export const MainPage = () => {
+export const MainPage = ({
+  isErrorApp,
+  currentSong,
+  setCurrentSong,
+  trackListAll,
+}) => {
   const [loadApp, setLoadingApp] = useState(false)
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -19,10 +24,16 @@ export const MainPage = () => {
       <S.Container>
         <S.Main>
           <NavMenu />
-          <SectionTrackList loadApp={loadApp} />
+          <SectionTrackList
+            loadApp={loadApp}
+            currentSong={currentSong}
+            setCurrentSong={setCurrentSong}
+            trackListAll={trackListAll}
+            isErrorApp={isErrorApp}
+          />
           <Sidebar loadApp={loadApp} personalName="Sergey.Ivanov" />
         </S.Main>
-        <AudioPlayer loadApp={loadApp} />
+        <AudioPlayer loadApp={loadApp} currentSong={currentSong} />
         <S.Footer></S.Footer>
       </S.Container>
     </S.Wrapper>

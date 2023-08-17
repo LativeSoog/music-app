@@ -1,9 +1,21 @@
 import * as S from './style.js'
 
-export function Track({ title, titleSpan, link, author, album, time }) {
+export function Track({
+  title,
+  titleSpan,
+  link,
+  author,
+  album,
+  time,
+  setCurrentSong,
+}) {
   return (
     <S.PlaylistItem>
-      <S.PlaylistTrack>
+      <S.PlaylistTrack
+        onClick={() => {
+          setCurrentSong({ title, author })
+        }}
+      >
         <S.TrackTitle>
           <S.TrackTitleImage>
             <S.TrackTitleSvg alt="music">
