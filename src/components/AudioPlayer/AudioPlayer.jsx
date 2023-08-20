@@ -10,6 +10,8 @@ export function AudioPlayer({ loadApp, currentSong }) {
   const btnBarPlay = () => {
     setIsPlaying(true)
     audioRef.current?.play()
+
+    console.log(audioRef)
   }
 
   const btnBarPause = () => {
@@ -33,6 +35,13 @@ export function AudioPlayer({ loadApp, currentSong }) {
 
   const btnBarSnuffle = () => {
     alert('Ещё не реализовано')
+  }
+
+  const btnBarVolume = (event) => {
+    if (audioRef.current) {
+      const volumeUserClick = event.target.value
+      audioRef.current.volume = volumeUserClick
+    }
   }
 
   return (
@@ -131,6 +140,10 @@ export function AudioPlayer({ loadApp, currentSong }) {
                   <S.VolumeProgressLine
                     type="range"
                     name="range"
+                    min={0}
+                    max={1}
+                    step={0.01}
+                    onChange={btnBarVolume}
                   ></S.VolumeProgressLine>
                 </S.VolumeProgress>
               </S.VolumeContent>

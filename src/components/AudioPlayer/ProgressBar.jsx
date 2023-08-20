@@ -7,8 +7,8 @@ export function ProgressBar({ audioRef }) {
 
   const btnClickProgressBar = (event) => {
     if (audioRef.current) {
-      const currentUser = event.target.value
-      audioRef.current.currentTime = currentUser
+      const currentTimeUserClick = event.target.value
+      audioRef.current.currentTime = currentTimeUserClick
     }
   }
 
