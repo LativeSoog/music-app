@@ -53,6 +53,11 @@ export const BarContent = styled.div`
   flex-direction: column;
 `
 
+export const BarPlayerTimeProgress = styled.div`
+  font-size: 20px;
+  text-align: right;
+`
+
 export const BarPlayerProgress = styled.input`
   --progress-height: 8px;
   --progress-color: #b672ff;
