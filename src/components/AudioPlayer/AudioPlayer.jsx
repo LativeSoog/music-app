@@ -1,36 +1,82 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import * as S from './style.js'
+import { ProgressBar } from './ProgressBar.jsx'
 
 export function AudioPlayer({ loadApp, currentSong }) {
+  const audioRef = useRef(null)
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [isRepeat, setIsRepeat] = useState(false)
+
+  const btnBarPlay = () => {
+    setIsPlaying(true)
+    audioRef.current?.play()
+  }
+
+  const btnBarPause = () => {
+    audioRef.current.pause()
+    setIsPlaying(false)
+  }
+  useEffect(btnBarPlay, [currentSong])
+
+  const btnBarPrev = () => {
+    alert('Ещё не реализовано')
+  }
+
+  const btnBarNext = () => {
+    alert('Ещё не реализовано')
+  }
+
+  const btnBarRepeat = () => {
+    audioRef.current.loop = true
+    isRepeat ? setIsRepeat(false) : setIsRepeat(true)
+  }
+
+  const btnBarSnuffle = () => {
+    alert('Ещё не реализовано')
+  }
+
   return (
     currentSong && (
       <S.Bar>
+        <audio controls src={currentSong.link} ref={audioRef}></audio>
+        {/* <S.AudioComponent
+          ref={audioRef}
+          src={currentSong.link}
+        ></S.AudioComponent> */}
         <S.BarContent>
-          <S.BarPlayerProgress></S.BarPlayerProgress>
+          <ProgressBar audioRef={audioRef} />
           <S.BarPlayerBlock>
             <S.BarPlayer>
               <S.PlayerControls>
-                <S.PlayerBtnPrev>
+                <S.PlayerBtnPrev onClick={btnBarPrev}>
                   <S.PlayerBtnPrevSvg alt="prev">
                     <use xlinkHref="img/icon/sprite.svg#icon-prev"></use>
                   </S.PlayerBtnPrevSvg>
                 </S.PlayerBtnPrev>
-                <S.PlayerBtnPlay>
+                <S.PlayerBtnPlay onClick={isPlaying ? btnBarPause : btnBarPlay}>
                   <S.PlayerBtnPlaySvg alt="play">
-                    <use xlinkHref="img/icon/sprite.svg#icon-play"></use>
+                    <use
+                      xlinkHref={`../img/icon/sprite.svg#icon-${
+                        isPlaying ? 'pause' : 'play'
+                      }`}
+                    ></use>
                   </S.PlayerBtnPlaySvg>
                 </S.PlayerBtnPlay>
-                <S.PlayerBtnNext>
+                <S.PlayerBtnNext onClick={btnBarNext}>
                   <S.PlayerBtnNextSvg alt="next">
                     <use xlinkHref="img/icon/sprite.svg#icon-next"></use>
                   </S.PlayerBtnNextSvg>
                 </S.PlayerBtnNext>
-                <S.PlayerBtnRepeat>
+                <S.PlayerBtnRepeat onClick={btnBarRepeat}>
                   <S.PlayerBtnRepeatSvg alt="repeat">
-                    <use xlinkHref="img/icon/sprite.svg#icon-repeat"></use>
+                    <use
+                      xlinkHref={`img/icon/sprite.svg#icon-${
+                        isRepeat ? 'repeat-active' : 'repeat'
+                      }`}
+                    ></use>
                   </S.PlayerBtnRepeatSvg>
                 </S.PlayerBtnRepeat>
-                <S.PlayerBtnSnuffle>
+                <S.PlayerBtnSnuffle onClick={btnBarSnuffle}>
                   <S.PlayerBtnSnuffleSvg alt="shuffle">
                     <use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
                   </S.PlayerBtnSnuffleSvg>

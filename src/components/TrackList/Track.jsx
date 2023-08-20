@@ -13,7 +13,7 @@ export function Track({
     <S.PlaylistItem>
       <S.PlaylistTrack
         onClick={() => {
-          setCurrentSong({ title, author })
+          setCurrentSong({ title, author, link })
         }}
       >
         <S.TrackTitle>
