@@ -10,8 +10,6 @@ export function AudioPlayer({ loadApp, currentSong }) {
   const btnBarPlay = () => {
     setIsPlaying(true)
     audioRef.current?.play()
-
-    console.log(audioRef)
   }
 
   const btnBarPause = () => {
@@ -29,8 +27,8 @@ export function AudioPlayer({ loadApp, currentSong }) {
   }
 
   const btnBarRepeat = () => {
-    audioRef.current.loop = true
     isRepeat ? setIsRepeat(false) : setIsRepeat(true)
+    isRepeat ? (audioRef.current.loop = false) : (audioRef.current.loop = true)
   }
 
   const btnBarSnuffle = () => {
@@ -44,14 +42,21 @@ export function AudioPlayer({ loadApp, currentSong }) {
     }
   }
 
+  const endTrack = () => {
+    if (!isRepeat) {
+      setIsPlaying(false)
+    }
+  }
+
   return (
     currentSong && (
       <S.Bar>
-        <audio controls src={currentSong.link} ref={audioRef}></audio>
-        {/* <S.AudioComponent
+        {/* <audio controls src={currentSong.link} ref={audioRef}></audio> */}
+        <S.AudioComponent
           ref={audioRef}
           src={currentSong.link}
-        ></S.AudioComponent> */}
+          onEnded={endTrack}
+        ></S.AudioComponent>
         <S.BarContent>
           <ProgressBar audioRef={audioRef} />
           <S.BarPlayerBlock>

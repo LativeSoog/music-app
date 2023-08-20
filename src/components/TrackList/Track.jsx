@@ -23,7 +23,7 @@ export function Track({
             </S.TrackTitleSvg>
           </S.TrackTitleImage>
           <S.TrackTitleText>
-            <S.TrackTitleLink href={link}>
+            <S.TrackTitleLink>
               {title} <S.TrackTitleSpan>{titleSpan}</S.TrackTitleSpan>
             </S.TrackTitleLink>
           </S.TrackTitleText>
