@@ -17,7 +17,7 @@ function App() {
     } catch (error) {
       setIsErrorApp(true)
     }
-  })
+  }, [])
 
   return (
     <>
