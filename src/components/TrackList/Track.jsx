@@ -13,7 +13,7 @@ export function Track({
     <S.PlaylistItem>
       <S.PlaylistTrack
         onClick={() => {
-          setCurrentSong({ title, author })
+          setCurrentSong({ title, author, link })
         }}
       >
         <S.TrackTitle>
@@ -23,7 +23,7 @@ export function Track({
             </S.TrackTitleSvg>
           </S.TrackTitleImage>
           <S.TrackTitleText>
-            <S.TrackTitleLink href={link}>
+            <S.TrackTitleLink>
               {title} <S.TrackTitleSpan>{titleSpan}</S.TrackTitleSpan>
             </S.TrackTitleLink>
           </S.TrackTitleText>

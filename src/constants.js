@@ -15,3 +15,18 @@ export const CATEGORIES = [
     urlImg: 'img/playlist03.png',
   },
 ]
+
+export const formatTime = (second) => {
+  let minutes = Math.floor(second / 60)
+  let seconds = Math.floor(second % 60)
+
+  if (seconds < 10) {
+    seconds = '0' + seconds
+  }
+
+  if (minutes < 10) {
+    minutes = '0' + minutes
+  }
+
+  return `${minutes}:${seconds}`
+}
