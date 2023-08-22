@@ -6,7 +6,7 @@ import { getAllTrack } from './api.js'
 function App() {
   const user = window.localStorage.getItem('user')
   const [isErrorApp, setIsErrorApp] = useState(false)
-  const [currentSong, setCurrentSong] = useState()
+  const [currentSong, setCurrentSong] = useState(false)
   const [trackListAll, setTrackListAll] = useState([])
 
   useEffect(() => {
