@@ -1,17 +1,19 @@
 import { Link } from 'react-router-dom'
 import * as S from './RegistrationPageStyles.js'
 import { useState } from 'react'
+import { registrationUsersApi } from '../../api.js'
 
 export const RegistrationPage = () => {
   const [error, setError] = useState(null)
 
   const [email, setEmail] = useState('')
+  const [username, setUserName] = useState('')
   const [password, setPassword] = useState('')
   const [repeatPassword, setRepeatPassword] = useState('')
 
   const handleRegister = async () => {
     alert(`Выполняется регистрация: ${email} ${password}`)
-    setError('Неизвестная ошибка регистрации')
+    registrationUsersApi({ username, email, password })
   }
 
   return (
@@ -24,6 +26,15 @@ export const RegistrationPage = () => {
         </Link>
 
         <S.Inputs>
+          <S.ModalInput
+            type="text"
+            name="username"
+            placeholder="Имя пользователя"
+            value={username}
+            onChange={(event) => {
+              setUserName(event.target.value)
+            }}
+          />
           <S.ModalInput
             type="text"
             name="login"
