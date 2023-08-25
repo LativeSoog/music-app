@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import * as S from './LoginPageStyles.js'
 import { useEffect, useState } from 'react'
+import { authUserApi } from '../../api.js'
 
 export function LoginPage() {
   const [error, setError] = useState(null)
@@ -8,11 +9,18 @@ export function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleLogin = async ({ email, password }) => {
-    alert(`Выполняется вход: ${email} ${password}`)
-    setError('Неизвестная ошибка входа')
+  const checkAndLogin = async () => {
+    try {
+      await authUserApi({ email, password })
+    } catch (error) {
+      setError(error.message)
+    }
   }
 
+  const handleLogin = ({ email, password }) => {
+    alert(`Выполняется вход: ${email} ${password}`)
+    checkAndLogin()
+  }
 
   return (
     <S.PageContainer>
