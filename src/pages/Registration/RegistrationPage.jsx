@@ -11,9 +11,30 @@ export const RegistrationPage = () => {
   const [password, setPassword] = useState('')
   const [repeatPassword, setRepeatPassword] = useState('')
 
-  const handleRegister = async () => {
-    alert(`Выполняется регистрация: ${email} ${password}`)
-    registrationUsersApi({ username, email, password })
+  const checkAndRegistration = async () => {
+    try {
+      await registrationUsersApi({ username, email, password })
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(error.message)
+      }
+    }
+  }
+
+  const handleRegister = () => {
+    if (!username) {
+      setError('Укажите имя пользователя')
+    } else if (!email) {
+      setError('Укажите адрес электронной почты')
+    } else if (!password) {
+      setError('Укажите пароль')
+    } else if (password !== repeatPassword) {
+      setError('Указанные пароли не совпадают')
+    } else if (password.length < 8) {
+      setError('Пароль должен быть не менее 8-ми символов')
+    } else {
+      checkAndRegistration()
+    }
   }
 
   return (

@@ -16,6 +16,7 @@ export const getAllTrack = async () => {
 
 export const registrationUsersApi = async ({ username, email, password }) => {
   catalog = 'user/signup/'
+  let responseJson
 
   return fetch(host + catalog, {
     method: 'POST',
@@ -28,12 +29,10 @@ export const registrationUsersApi = async ({ username, email, password }) => {
       'content-type': 'application/json',
     },
   }).then((response) => {
-    if (!response.ok) {
-      response.json().then((json) => {
-        console.log(json)
-      })
+    if (response.ok) {
+      response.json()
     } else {
-      return response
+      throw new Error('Пользователь с таким именем или почтой уже существует')
     }
   })
 }
