@@ -1,17 +1,22 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import * as S from './LoginPageStyles.js'
 import { useEffect, useState } from 'react'
 import { authUserApi } from '../../api.js'
 
-export function LoginPage() {
+export function LoginPage({ setUser }) {
   const [error, setError] = useState(null)
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  const navigate = useNavigate()
+
   const checkAndLogin = async () => {
     try {
-      await authUserApi({ email, password })
+      const userLoginInfo = await authUserApi({ email, password })
+      localStorage.setItem('user', JSON.stringify(userLoginInfo.username))
+      setUser(userLoginInfo)
+      navigate('/')
     } catch (error) {
       setError(error.message)
     }
