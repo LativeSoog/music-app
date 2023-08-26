@@ -7,6 +7,7 @@ import * as S from '../../style/AppStyle.js'
 import { UserContext } from '../../contexts/userContext.jsx'
 
 export const MainPage = ({
+  setUser,
   isErrorApp,
   currentSong,
   setCurrentSong,
@@ -25,7 +26,7 @@ export const MainPage = ({
     <S.Wrapper>
       <S.Container>
         <S.Main>
-          <NavMenu />
+          <NavMenu setUser={setUser} />
           <SectionTrackList
             loadApp={loadApp}
             currentSong={currentSong}

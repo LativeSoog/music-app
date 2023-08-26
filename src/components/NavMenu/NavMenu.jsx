@@ -1,9 +1,14 @@
 import { useState } from 'react'
 import * as S from './style.js'
 
-export function NavMenu(props) {
+export function NavMenu({ setUser }) {
   const [visible, setVisible] = useState(false)
   const toggleButton = () => setVisible(!visible)
+
+  const btnLogout = () => {
+    window.localStorage.clear()
+    setUser(null)
+  }
 
   return (
     <S.MainNav>
@@ -20,7 +25,7 @@ export function NavMenu(props) {
           <S.MenuList>
             <NavMenuItem link="/" text="Главное" />
             <NavMenuItem link="/favorites" text="Мой плейлист" />
-            <NavMenuItem link="/login" text="Войти" />
+            <NavMenuItem link="/login" text="Выйти" onClick={btnLogout} />
           </S.MenuList>
         </S.NavMenu>
       )}

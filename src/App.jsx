@@ -5,9 +5,9 @@ import { getAllTrack } from './api.js'
 import { UserContext } from './contexts/userContext.jsx'
 
 function App() {
-  // const user = window.localStorage.getItem('user')
+  // const User = window.localStorage.getItem('user')
 
-  const [user, setUser] = useState()
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
   const [isErrorApp, setIsErrorApp] = useState(false)
   const [currentSong, setCurrentSong] = useState(false)
   const [trackListAll, setTrackListAll] = useState([])

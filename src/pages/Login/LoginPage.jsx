@@ -14,7 +14,7 @@ export function LoginPage({ setUser }) {
   const checkAndLogin = async () => {
     try {
       const userLoginInfo = await authUserApi({ email, password })
-      localStorage.setItem('user', JSON.stringify(userLoginInfo.username))
+      localStorage.setItem('user', JSON.stringify(userLoginInfo))
       setUser(userLoginInfo)
       navigate('/')
     } catch (error) {

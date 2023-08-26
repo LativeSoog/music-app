@@ -6,7 +6,7 @@ import { RegistrationPage } from './pages/Registration/RegistrationPage.jsx'
 import { FavoritesPage } from './pages/Favorites/FavoritesPage.jsx'
 import { CategoryPage } from './pages/Category/CategoryPage.jsx'
 import { ProtectedRoute } from './protectedRoute.js'
-import { useUserContext } from './contexts/userContext.jsx'
+import { UserContext, useUserContext } from './contexts/userContext.jsx'
 
 export const AppRoutes = ({
   setUser,
@@ -15,17 +15,18 @@ export const AppRoutes = ({
   trackListAll,
   isErrorApp,
 }) => {
-  const user = useUserContext()
+  const user = useUserContext(UserContext)
   return (
     <Routes>
       <Route path="*" element={<NotFoundPage />} />
 
-      <Route element={<ProtectedRoute isAllowed={Boolean({ user })} />}>
+      <Route element={<ProtectedRoute isAllowed={Boolean(user)} />}>
         <Route path="/favorites" element={<FavoritesPage />} />
         <Route
           path="/"
           element={
             <MainPage
+              setUser={setUser}
               currentSong={currentSong}
               setCurrentSong={setCurrentSong}
               trackListAll={trackListAll}
