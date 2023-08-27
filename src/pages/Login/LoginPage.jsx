@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import * as S from './LoginPageStyles.js'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { authUserApi } from '../../api.js'
 
 export function LoginPage({ setUser }) {
@@ -44,7 +44,7 @@ export function LoginPage({ setUser }) {
       <S.ModalForm>
         <Link to="/login">
           <S.ModalLogo>
-            <S.ModalLogoImage src="/img/logo_modal.png" alt="logo" />
+            <S.ModalLogoImage src="/img/logo_black.png" alt="logo" />
           </S.ModalLogo>
         </Link>
         <S.Inputs>
