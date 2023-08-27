@@ -1,10 +1,12 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import * as S from './RegistrationPageStyles.js'
 import { useState } from 'react'
 import { registrationUsersApi } from '../../api.js'
 
 export const RegistrationPage = () => {
   const [error, setError] = useState(null)
+  const [isRegProcess, setIsRegProcess] = useState(false)
+  const navigate = useNavigate()
 
   const [email, setEmail] = useState('')
   const [username, setUserName] = useState('')
@@ -13,25 +15,35 @@ export const RegistrationPage = () => {
 
   const checkAndRegistration = async () => {
     try {
+      setIsRegProcess(true)
       await registrationUsersApi({ username, email, password })
+      setIsRegProcess(false)
+      navigate('/login')
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message)
       }
+    } finally {
+      setIsRegProcess(false)
     }
   }
 
   const handleRegister = () => {
     if (!username) {
       setError('Укажите имя пользователя')
+      return
     } else if (!email) {
       setError('Укажите адрес электронной почты')
+      return
     } else if (!password) {
       setError('Укажите пароль')
+      return
     } else if (password !== repeatPassword) {
       setError('Указанные пароли не совпадают')
+      return
     } else if (password.length < 8) {
       setError('Пароль должен быть не менее 8-ми символов')
+      return
     } else {
       checkAndRegistration()
     }
@@ -86,8 +98,8 @@ export const RegistrationPage = () => {
         </S.Inputs>
         {error && <S.Error>{error}</S.Error>}
         <S.Buttons>
-          <S.PrimaryButton onClick={handleRegister}>
-            Зарегистрироваться
+          <S.PrimaryButton onClick={handleRegister} disabled={isRegProcess}>
+            {isRegProcess ? 'Регистрация...' : 'Зарегистрироваться'}
           </S.PrimaryButton>
         </S.Buttons>
       </S.ModalForm>

@@ -5,6 +5,7 @@ import { authUserApi } from '../../api.js'
 
 export function LoginPage({ setUser }) {
   const [error, setError] = useState(null)
+  const [isLoginProcess, setIsLoginProcess] = useState(false)
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -13,18 +14,29 @@ export function LoginPage({ setUser }) {
 
   const checkAndLogin = async () => {
     try {
+      setIsLoginProcess(true)
       const userLoginInfo = await authUserApi({ email, password })
       localStorage.setItem('user', JSON.stringify(userLoginInfo))
       setUser(userLoginInfo)
+      setIsLoginProcess(false)
       navigate('/')
     } catch (error) {
       setError(error.message)
+    } finally {
+      setIsLoginProcess(false)
     }
   }
 
-  const handleLogin = ({ email, password }) => {
-    alert(`Выполняется вход: ${email} ${password}`)
-    checkAndLogin()
+  const handleLogin = () => {
+    if (!email) {
+      setError('Укажите эл. почту')
+      return
+    } else if (!password) {
+      setError('Введите пароль')
+      return
+    } else {
+      checkAndLogin()
+    }
   }
 
   return (
@@ -58,7 +70,7 @@ export function LoginPage({ setUser }) {
         {error && <S.Error>{error}</S.Error>}
         <S.Buttons>
           <S.PrimaryButton onClick={() => handleLogin({ email, password })}>
-            Войти
+            {isLoginProcess ? 'Выполняется вход...' : 'Войти'}
           </S.PrimaryButton>
           <Link to="/registration">
             <S.SecondaryButton>Зарегистрироваться</S.SecondaryButton>

@@ -6,8 +6,7 @@ export function NavMenu({ setUser }) {
   const toggleButton = () => setVisible(!visible)
 
   const btnLogout = () => {
-    window.localStorage.clear()
-    setUser(null)
+    window.localStorage.removeItem('user')
   }
 
   return (
@@ -25,7 +24,7 @@ export function NavMenu({ setUser }) {
           <S.MenuList>
             <NavMenuItem link="/" text="Главное" />
             <NavMenuItem link="/favorites" text="Мой плейлист" />
-            <NavMenuItem link="/login" text="Выйти" onClick={btnLogout} />
+            <NavMenuItem link="/login" text="Выйти" onClick={btnLogout()} />
           </S.MenuList>
         </S.NavMenu>
       )}
