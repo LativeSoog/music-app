@@ -54,7 +54,7 @@ export const RegistrationPage = () => {
       <S.ModalForm>
         <Link to="/registration">
           <S.ModalLogo>
-            <S.ModalLogoImage src="/img/logo_modal.png" alt="logo" />
+            <S.ModalLogoImage src="/img/logo_black.png" alt="logo" />
           </S.ModalLogo>
         </Link>
 
