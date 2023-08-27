@@ -45,11 +45,17 @@ export const SidebarPersonalName = styled.p`
   margin-right: 16px;
 `
 
-export const SidebarAvatar = styled.div`
+export const SidebarLogoutBtn = styled.svg`
   width: 43px;
   height: 43px;
-  background-color: #313131;
   border-radius: 50%;
+  fill: transparent;
+  stroke: #696969;
+
+  &:hover {
+    cursor: pointer;
+    stroke: #acacac;
+  }
 `
 
 export const SidebarBlock = styled.div`
