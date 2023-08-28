@@ -18,28 +18,6 @@ const btnIconActiveMixin = css`
   cursor: pointer;
 `
 
-const animationSkeletonMixin = css`
-  @keyframes appLoading {
-    0% {
-      background-color: #313131;
-    }
-    25% {
-      background-color: #4e4e4e;
-    }
-    50% {
-      background-color: #313131;
-    }
-    75% {
-      background-color: #4e4e4e;
-    }
-    100% {
-      background-color: #4e4e4e;
-    }
-  }
-
-  animation: appLoading 3s ease-in-out;
-`
-
 export const Bar = styled.div`
   position: absolute;
   bottom: 0;
@@ -351,7 +329,6 @@ export const TrackPlayDislikeSvg = styled.svg`
 export const TrackPlayAuthorSkeleton = styled.div`
   width: 59px;
   height: 15px;
-  ${animationSkeletonMixin}
 `
 export const TrackPlayAlbumSkeleton = styled.div`
   width: 59px;

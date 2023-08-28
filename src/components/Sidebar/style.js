@@ -1,5 +1,27 @@
 import { Link } from 'react-router-dom'
-import { styled } from 'styled-components'
+import { css, styled } from 'styled-components'
+
+const animationSkeletonMixin = css`
+  @keyframes appLoading {
+    0% {
+      background-color: #313131;
+    }
+    25% {
+      background-color: #4e4e4e;
+    }
+    50% {
+      background-color: #313131;
+    }
+    75% {
+      background-color: #4e4e4e;
+    }
+    100% {
+      background-color: #4e4e4e;
+    }
+  }
+
+  animation: appLoading 3s ease-in-out;
+`
 
 export const MainSidebar = styled.div`
   max-width: 418px;
@@ -23,11 +45,17 @@ export const SidebarPersonalName = styled.p`
   margin-right: 16px;
 `
 
-export const SidebarAvatar = styled.div`
+export const SidebarLogoutBtn = styled.svg`
   width: 43px;
   height: 43px;
-  background-color: #313131;
   border-radius: 50%;
+  fill: transparent;
+  stroke: #696969;
+
+  &:hover {
+    cursor: pointer;
+    stroke: #acacac;
+  }
 `
 
 export const SidebarBlock = styled.div`
@@ -67,5 +95,5 @@ export const SidebarItemSkeleton = styled.div`
   width: 250px;
   height: 150px;
   margin-bottom: 30px;
-  animation: appLoading 3s ease-in-out;
+  ${animationSkeletonMixin}
 `
