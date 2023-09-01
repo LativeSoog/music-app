@@ -1,11 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
 import * as S from './style.js'
 import { ProgressBar } from './ProgressBar.jsx'
+import { useSelector } from 'react-redux'
+import { audioPlayerCurrentSong } from '../../store/selectors/audioplayer.js'
 
-export function AudioPlayer({ loadApp, currentSong }) {
+export function AudioPlayer({ loadApp }) {
   const audioRef = useRef(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [isRepeat, setIsRepeat] = useState(false)
+
+  const currentSong = useSelector(audioPlayerCurrentSong)
 
   const btnBarPlay = () => {
     setIsPlaying(true)
@@ -49,9 +53,8 @@ export function AudioPlayer({ loadApp, currentSong }) {
   }
 
   return (
-    currentSong && (
+    currentSong.status && (
       <S.Bar>
-        {/* <audio controls src={currentSong.link} ref={audioRef}></audio> */}
         <S.AudioComponent
           ref={audioRef}
           src={currentSong.link}

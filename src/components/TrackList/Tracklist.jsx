@@ -7,14 +7,13 @@ const StyledContentPlaylist = styled.div`
   overflow-y: auto;
 `
 
-export function TrackList({ currentSong, setCurrentSong, trackListAll }) {
+export function TrackList({ currentSong, trackListAll }) {
   return (
     <StyledContentPlaylist>
       {trackListAll.map((track) => {
         return (
           <Track
             currentSong={currentSong}
-            setCurrentSong={setCurrentSong}
             key={track.id}
             title={track.name}
             titleSpan=""
