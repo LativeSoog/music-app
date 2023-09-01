@@ -14,6 +14,7 @@ export function TrackList({ currentSong, trackListAll }) {
         return (
           <Track
             currentSong={currentSong}
+            track={track}
             key={track.id}
             title={track.name}
             titleSpan=""

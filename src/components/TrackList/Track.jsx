@@ -2,20 +2,13 @@ import { useDispatch } from 'react-redux'
 import * as S from './style.js'
 import { selectCurrentSong } from '../../store/actions/creators/audioplayer.js'
 
-export function Track({
-  title,
-  titleSpan,
-  link,
-  author,
-  album,
-  time,
-}) {
+export function Track({ title, titleSpan, link, author, album, time, track }) {
   const dispatch = useDispatch()
   return (
     <S.PlaylistItem>
       <S.PlaylistTrack
         onClick={() => {
-          dispatch(selectCurrentSong(title, author, link))
+          dispatch(selectCurrentSong(track))
         }}
       >
         <S.TrackTitle>

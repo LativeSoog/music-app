@@ -1,10 +1,6 @@
 import { SET_CURRENT_SONG } from '../type/audioplayer'
 
-export const selectCurrentSong = (title, author, link) => ({
+export const selectCurrentSong = (track) => ({
   type: SET_CURRENT_SONG,
-  payload: {
-    title: title,
-    author: author,
-    link: link,
-  },
+  payload: track,
 })

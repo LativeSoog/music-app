@@ -10,6 +10,7 @@ export function AudioPlayer({ loadApp }) {
   const [isRepeat, setIsRepeat] = useState(false)
 
   const currentSong = useSelector(audioPlayerCurrentSong)
+  console.log(currentSong)
 
   const btnBarPlay = () => {
     setIsPlaying(true)
@@ -53,11 +54,11 @@ export function AudioPlayer({ loadApp }) {
   }
 
   return (
-    currentSong.status && (
+    currentSong.id && (
       <S.Bar>
         <S.AudioComponent
           ref={audioRef}
-          src={currentSong.link}
+          src={currentSong.track_file}
           onEnded={endTrack}
         ></S.AudioComponent>
         <S.BarContent>
@@ -110,7 +111,7 @@ export function AudioPlayer({ loadApp }) {
                     </S.TrackPlayImage>
                     <S.TrackPlayAuthor>
                       <S.TrackPlayAuthorLink href="http://">
-                        {currentSong.title}
+                        {currentSong.name}
                       </S.TrackPlayAuthorLink>
                     </S.TrackPlayAuthor>
                     <S.TrackPlayAlbum>
