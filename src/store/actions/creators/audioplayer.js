@@ -1,6 +1,7 @@
 import {
   GET_TRACK_LIST_ALL,
   NEXT_TRACK,
+  PREV_TRACK,
   SET_CURRENT_SONG,
   SET_IS_PLAYING,
 } from '../type/audioplayer'
@@ -23,4 +24,9 @@ export const setIsPlaying = (isPlaying) => ({
 export const nextTrack = (nextTrackIndex) => ({
   type: NEXT_TRACK,
   payload: nextTrackIndex,
+})
+
+export const prevTrack = (prevTrackIndex) => ({
+  type: PREV_TRACK,
+  payload: prevTrackIndex,
 })

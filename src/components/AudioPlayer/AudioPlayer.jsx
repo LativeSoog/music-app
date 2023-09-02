@@ -9,6 +9,7 @@ import {
 } from '../../store/selectors/audioplayer.js'
 import {
   nextTrack,
+  prevTrack,
   setIsPlaying,
 } from '../../store/actions/creators/audioplayer.js'
 
@@ -37,12 +38,21 @@ export function AudioPlayer({ loadApp }) {
   }
 
   const btnBarPrev = () => {
-    alert('Ещё не реализовано')
+    if (currentSong) {
+      const currentTrackIndex = tracklist.indexOf(currentSong)
+
+      if (currentTrackIndex > 0) {
+        const prevTrackIndex = currentTrackIndex - 1
+        dispatch(prevTrack(prevTrackIndex))
+      }
+    }
   }
 
   const btnBarNext = () => {
-    const currentTrackIndex = tracklist.indexOf(currentSong) + 1
-    dispatch(nextTrack(currentTrackIndex))
+    if (currentSong) {
+      const nextTrackIndex = tracklist.indexOf(currentSong) + 1
+      dispatch(nextTrack(nextTrackIndex))
+    }
   }
 
   const btnBarRepeat = () => {

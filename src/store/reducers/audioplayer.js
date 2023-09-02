@@ -1,6 +1,7 @@
 import {
   GET_TRACK_LIST_ALL,
   NEXT_TRACK,
+  PREV_TRACK,
   SET_CURRENT_SONG,
   SET_IS_PLAYING,
 } from '../actions/type/audioplayer'
@@ -33,6 +34,12 @@ export default function audioPlayerReducer(state = initialState, action) {
       }
 
     case NEXT_TRACK:
+      return {
+        ...state,
+        currentSong: state.tracklist[action.payload],
+      }
+
+    case PREV_TRACK:
       return {
         ...state,
         currentSong: state.tracklist[action.payload],
