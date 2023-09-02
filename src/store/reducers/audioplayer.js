@@ -1,4 +1,4 @@
-import { SET_CURRENT_SONG } from '../actions/type/audioplayer'
+import { SET_CURRENT_SONG, SET_IS_PLAYING } from '../actions/type/audioplayer'
 
 const initialState = {
   isPlaying: false,
@@ -10,8 +10,17 @@ export default function audioPlayerReducer(state = initialState, action) {
     case SET_CURRENT_SONG:
       const track = action.payload
       return {
-        isPlaying: true,
+        ...state,
+        isPlaying: !state.isPlaying,
         currentSong: track,
+      }
+
+    case SET_IS_PLAYING:
+      const isPlaying = action.payload
+
+      return {
+        ...state,
+        isPlaying: isPlaying,
       }
 
     default:

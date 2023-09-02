@@ -1,27 +1,35 @@
 import { useEffect, useRef, useState } from 'react'
 import * as S from './style.js'
 import { ProgressBar } from './ProgressBar.jsx'
-import { useSelector } from 'react-redux'
-import { audioPlayerCurrentSong } from '../../store/selectors/audioplayer.js'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  audioPlayerCurrentSong,
+  audioPlayerIsPlaying,
+} from '../../store/selectors/audioplayer.js'
+import { setIsPlaying } from '../../store/actions/creators/audioplayer.js'
 
 export function AudioPlayer({ loadApp }) {
   const audioRef = useRef(null)
-  const [isPlaying, setIsPlaying] = useState(false)
   const [isRepeat, setIsRepeat] = useState(false)
 
   const currentSong = useSelector(audioPlayerCurrentSong)
-  console.log(currentSong)
+  const isPlaying = useSelector(audioPlayerIsPlaying)
+
+  const dispatch = useDispatch()
 
   const btnBarPlay = () => {
-    setIsPlaying(true)
     audioRef.current?.play()
   }
 
   const btnBarPause = () => {
     audioRef.current.pause()
-    setIsPlaying(false)
   }
   useEffect(btnBarPlay, [currentSong])
+
+  const btnBarPlayback = () => {
+    isPlaying ? btnBarPause() : btnBarPlay()
+    dispatch(setIsPlaying(isPlaying ? false : true))
+  }
 
   const btnBarPrev = () => {
     alert('Ещё не реализовано')
@@ -49,7 +57,7 @@ export function AudioPlayer({ loadApp }) {
 
   const endTrack = () => {
     if (!isRepeat) {
-      setIsPlaying(false)
+      dispatch(setIsPlaying(false))
     }
   }
 
@@ -71,7 +79,7 @@ export function AudioPlayer({ loadApp }) {
                     <use xlinkHref="img/icon/sprite.svg#icon-prev"></use>
                   </S.PlayerBtnPrevSvg>
                 </S.PlayerBtnPrev>
-                <S.PlayerBtnPlay onClick={isPlaying ? btnBarPause : btnBarPlay}>
+                <S.PlayerBtnPlay onClick={btnBarPlayback}>
                   <S.PlayerBtnPlaySvg alt="play">
                     <use
                       xlinkHref={`../img/icon/sprite.svg#icon-${
