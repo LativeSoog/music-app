@@ -20,8 +20,7 @@ export const setIsPlaying = (isPlaying) => ({
   payload: isPlaying,
 })
 
-export const nextTrack = () => ({
+export const nextTrack = (nextTrackIndex) => ({
   type: NEXT_TRACK,
-  payload:
-    'https://painassasin.online/media/music_files/Frank_Schroter_-_Open_Sea_epic.mp3',
+  payload: nextTrackIndex,
 })

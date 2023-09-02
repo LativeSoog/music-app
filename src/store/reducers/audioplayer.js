@@ -27,21 +27,15 @@ export default function audioPlayerReducer(state = initialState, action) {
       }
 
     case SET_IS_PLAYING:
-      const isPlaying = action.payload
-
       return {
         ...state,
-        isPlaying: isPlaying,
+        isPlaying: action.payload,
       }
 
     case NEXT_TRACK:
-      const nextTrackId = action.payload
       return {
         ...state,
-        currentSong: {
-          ...state.currentSong,
-          track_file: nextTrackId,
-        },
+        currentSong: state.tracklist[action.payload],
       }
 
     default:

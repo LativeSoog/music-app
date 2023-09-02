@@ -4,6 +4,7 @@ import { ProgressBar } from './ProgressBar.jsx'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   audioPlayerCurrentSong,
+  audioPlayerGetTrackList,
   audioPlayerIsPlaying,
 } from '../../store/selectors/audioplayer.js'
 import {
@@ -17,6 +18,7 @@ export function AudioPlayer({ loadApp }) {
 
   const currentSong = useSelector(audioPlayerCurrentSong)
   const isPlaying = useSelector(audioPlayerIsPlaying)
+  const tracklist = useSelector(audioPlayerGetTrackList)
 
   const dispatch = useDispatch()
 
@@ -39,8 +41,8 @@ export function AudioPlayer({ loadApp }) {
   }
 
   const btnBarNext = () => {
-    dispatch(nextTrack())
-    console.log(currentSong)
+    const currentTrackIndex = tracklist.indexOf(currentSong) + 1
+    dispatch(nextTrack(currentTrackIndex))
   }
 
   const btnBarRepeat = () => {
