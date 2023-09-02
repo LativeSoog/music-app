@@ -85,6 +85,20 @@ export const TrackTitle = styled.div`
   width: 447px;
 `
 
+const animationTrackTitleImageActive = css`
+  @keyframes TrackImageActive {
+    0%,
+    to {
+      transform: scale(0.5);
+    }
+    50% {
+      transform: scale(1);
+    }
+  }
+
+  animation: TrackImageActive 0.6s ease-in-out infinite both;
+`
+
 export const TrackTitleImage = styled.div`
   width: 51px;
   height: 51px;
@@ -94,6 +108,21 @@ export const TrackTitleImage = styled.div`
   align-items: center;
   justify-content: center;
   margin-right: 17px;
+`
+
+export const TrackTitleImageActive = styled.div`
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background-color: #b672ff;
+  border-radius: 8px;
+  display: block;
+
+  ${(props) =>
+    props.$isPlaying &&
+    css`
+      ${animationTrackTitleImageActive}
+    `}
 `
 
 export const TrackTitleSvg = styled.svg`

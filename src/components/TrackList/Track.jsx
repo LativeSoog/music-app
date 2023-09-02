@@ -1,9 +1,16 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import * as S from './style.js'
 import { selectCurrentSong } from '../../store/actions/creators/audioplayer.js'
+import {
+  audioPlayerCurrentSong,
+  audioPlayerIsPlaying,
+} from '../../store/selectors/audioplayer.js'
 
 export function Track({ title, titleSpan, link, author, album, time, track }) {
+  const currentSong = useSelector(audioPlayerCurrentSong)
+  const isPlaying = useSelector(audioPlayerIsPlaying)
   const dispatch = useDispatch()
+
   return (
     <S.PlaylistItem>
       <S.PlaylistTrack
@@ -13,6 +20,12 @@ export function Track({ title, titleSpan, link, author, album, time, track }) {
       >
         <S.TrackTitle>
           <S.TrackTitleImage>
+            {currentSong.id === track.id && (
+              <S.TrackTitleImageActive
+                $isPlaying={isPlaying}
+              ></S.TrackTitleImageActive>
+            )}
+
             <S.TrackTitleSvg alt="music">
               <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
             </S.TrackTitleSvg>
