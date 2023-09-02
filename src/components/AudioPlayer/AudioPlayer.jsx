@@ -77,7 +77,7 @@ export function AudioPlayer({ loadApp }) {
 
   const endTrack = () => {
     if (!isRepeat) {
-      dispatch(setIsPlaying(false))
+      btnBarNext()
     }
   }
 
