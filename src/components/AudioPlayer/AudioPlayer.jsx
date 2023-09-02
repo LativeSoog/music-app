@@ -6,7 +6,10 @@ import {
   audioPlayerCurrentSong,
   audioPlayerIsPlaying,
 } from '../../store/selectors/audioplayer.js'
-import { setIsPlaying } from '../../store/actions/creators/audioplayer.js'
+import {
+  nextTrack,
+  setIsPlaying,
+} from '../../store/actions/creators/audioplayer.js'
 
 export function AudioPlayer({ loadApp }) {
   const audioRef = useRef(null)
@@ -36,7 +39,8 @@ export function AudioPlayer({ loadApp }) {
   }
 
   const btnBarNext = () => {
-    alert('Ещё не реализовано')
+    dispatch(nextTrack())
+    console.log(currentSong)
   }
 
   const btnBarRepeat = () => {

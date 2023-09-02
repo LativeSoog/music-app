@@ -6,13 +6,7 @@ import { Sidebar } from '../../components/Sidebar/Sidebar.jsx'
 import * as S from '../../style/AppStyle.js'
 import { UserContext } from '../../contexts/userContext.jsx'
 
-export const MainPage = ({
-  setUser,
-  isErrorApp,
-  currentSong,
-  setCurrentSong,
-  trackListAll,
-}) => {
+export const MainPage = ({ setUser, isErrorApp }) => {
   const [loadApp, setLoadingApp] = useState(false)
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -27,16 +21,10 @@ export const MainPage = ({
       <S.Container>
         <S.Main>
           <NavMenu setUser={setUser} />
-          <SectionTrackList
-            loadApp={loadApp}
-            currentSong={currentSong}
-            setCurrentSong={setCurrentSong}
-            trackListAll={trackListAll}
-            isErrorApp={isErrorApp}
-          />
+          <SectionTrackList loadApp={loadApp} isErrorApp={isErrorApp} />
           <Sidebar loadApp={loadApp} user={user} />
         </S.Main>
-        <AudioPlayer loadApp={loadApp} currentSong={currentSong} />
+        <AudioPlayer loadApp={loadApp} />
         <S.Footer></S.Footer>
       </S.Container>
     </S.Wrapper>

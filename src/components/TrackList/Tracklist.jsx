@@ -1,5 +1,7 @@
 import { styled } from 'styled-components'
 import { Track, TrackLoading } from './Track.jsx'
+import { useSelector } from 'react-redux'
+import { audioPlayerGetTrackList } from '../../store/selectors/audioplayer.js'
 
 const StyledContentPlaylist = styled.div`
   display: flex;
@@ -7,13 +9,14 @@ const StyledContentPlaylist = styled.div`
   overflow-y: auto;
 `
 
-export function TrackList({ currentSong, trackListAll }) {
+export function TrackList() {
+  const trackListAll = useSelector(audioPlayerGetTrackList)
+
   return (
     <StyledContentPlaylist>
       {trackListAll.map((track) => {
         return (
           <Track
-            currentSong={currentSong}
             track={track}
             key={track.id}
             title={track.name}
