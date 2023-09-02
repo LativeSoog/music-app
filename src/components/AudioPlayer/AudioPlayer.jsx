@@ -50,8 +50,12 @@ export function AudioPlayer({ loadApp }) {
 
   const btnBarNext = () => {
     if (currentSong) {
-      const nextTrackIndex = tracklist.indexOf(currentSong) + 1
-      dispatch(nextTrack(nextTrackIndex))
+      const currentTrackIndex = tracklist.indexOf(currentSong)
+
+      if (currentTrackIndex < tracklist.length - 1) {
+        const nextTrackIndex = tracklist.indexOf(currentSong) + 1
+        dispatch(nextTrack(nextTrackIndex))
+      }
     }
   }
 
