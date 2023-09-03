@@ -4,6 +4,7 @@ import {
   PREV_TRACK,
   SET_CURRENT_SONG,
   SET_IS_PLAYING,
+  SHUFFLE_TRACK,
 } from '../type/audioplayer'
 
 export const getTrackListAll = (tracklist) => ({
@@ -29,4 +30,9 @@ export const nextTrack = (nextTrackIndex) => ({
 export const prevTrack = (prevTrackIndex) => ({
   type: PREV_TRACK,
   payload: prevTrackIndex,
+})
+
+export const shuffleTrack = (nextTrackIndex) => ({
+  type: SHUFFLE_TRACK,
+  payload: nextTrackIndex,
 })

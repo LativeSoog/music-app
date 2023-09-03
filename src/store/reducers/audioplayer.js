@@ -4,6 +4,7 @@ import {
   PREV_TRACK,
   SET_CURRENT_SONG,
   SET_IS_PLAYING,
+  SHUFFLE_TRACK,
 } from '../actions/type/audioplayer'
 
 const initialState = {
@@ -40,6 +41,12 @@ export default function audioPlayerReducer(state = initialState, action) {
       }
 
     case PREV_TRACK:
+      return {
+        ...state,
+        currentSong: state.tracklist[action.payload],
+      }
+
+    case SHUFFLE_TRACK:
       return {
         ...state,
         currentSong: state.tracklist[action.payload],

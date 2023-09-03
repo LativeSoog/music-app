@@ -166,7 +166,7 @@ export const PlayerBtnRepeatSvg = styled.svg`
   stroke: #696969;
 `
 
-export const PlayerBtnSnuffle = styled.div`
+export const PlayerBtnShuffle = styled.div`
   ${playerBtnMixin};
   display: flex;
   align-items: center;
@@ -180,7 +180,7 @@ export const PlayerBtnSnuffle = styled.div`
   }
 `
 
-export const PlayerBtnSnuffleSvg = styled.svg`
+export const PlayerBtnShuffleSvg = styled.svg`
   width: 19px;
   height: 12px;
   fill: transparent;

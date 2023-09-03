@@ -11,17 +11,25 @@ import {
   nextTrack,
   prevTrack,
   setIsPlaying,
+  shuffleTrack,
 } from '../../store/actions/creators/audioplayer.js'
 
 export function AudioPlayer({ loadApp }) {
   const audioRef = useRef(null)
   const [isRepeat, setIsRepeat] = useState(false)
+  const [isShuffle, setIsShuffle] = useState(false)
 
   const currentSong = useSelector(audioPlayerCurrentSong)
   const isPlaying = useSelector(audioPlayerIsPlaying)
   const tracklist = useSelector(audioPlayerGetTrackList)
 
   const dispatch = useDispatch()
+
+  const shuffleTrackRandom = () => {
+    const randomIndexTrack =
+      Math.floor(Math.random() * (tracklist.length - 1 - 0 + 1)) + 0
+    return randomIndexTrack
+  }
 
   const btnBarPlay = () => {
     audioRef.current?.play()
@@ -56,6 +64,11 @@ export function AudioPlayer({ loadApp }) {
         const nextTrackIndex = tracklist.indexOf(currentSong) + 1
         dispatch(nextTrack(nextTrackIndex))
       }
+
+      if (isShuffle) {
+        const nextTrackIndex = shuffleTrackRandom()
+        dispatch(shuffleTrack(nextTrackIndex))
+      }
     }
   }
 
@@ -64,8 +77,8 @@ export function AudioPlayer({ loadApp }) {
     isRepeat ? (audioRef.current.loop = false) : (audioRef.current.loop = true)
   }
 
-  const btnBarSnuffle = () => {
-    alert('Ещё не реализовано')
+  const btnBarShuffle = () => {
+    isShuffle ? setIsShuffle(false) : setIsShuffle(true)
   }
 
   const btnBarVolume = (event) => {
@@ -122,11 +135,11 @@ export function AudioPlayer({ loadApp }) {
                     ></use>
                   </S.PlayerBtnRepeatSvg>
                 </S.PlayerBtnRepeat>
-                <S.PlayerBtnSnuffle onClick={btnBarSnuffle}>
-                  <S.PlayerBtnSnuffleSvg alt="shuffle">
+                <S.PlayerBtnShuffle onClick={() => btnBarShuffle()}>
+                  <S.PlayerBtnShuffleSvg alt="shuffle">
                     <use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
-                  </S.PlayerBtnSnuffleSvg>
-                </S.PlayerBtnSnuffle>
+                  </S.PlayerBtnShuffleSvg>
+                </S.PlayerBtnShuffle>
               </S.PlayerControls>
 
               <S.PlayerTrackPlay>
