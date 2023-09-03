@@ -33,6 +33,9 @@ export function AudioPlayer({ loadApp }) {
 
   const btnBarPlay = () => {
     audioRef.current?.play()
+    if (!isPlaying) {
+      dispatch(setIsPlaying(true))
+    }
   }
 
   const btnBarPause = () => {
@@ -51,10 +54,12 @@ export function AudioPlayer({ loadApp }) {
 
       if (currentTrackIndex > 0) {
         const prevTrackIndex = currentTrackIndex - 1
-        if (!isPlaying) {
-          dispatch(setIsPlaying(true))
-        }
         dispatch(prevTrack(prevTrackIndex))
+      }
+
+      if (isShuffle) {
+        const trackIndex = shuffleTrackRandom()
+        dispatch(shuffleTrack(trackIndex))
       }
     }
   }
@@ -65,15 +70,12 @@ export function AudioPlayer({ loadApp }) {
 
       if (currentTrackIndex < tracklist.length - 1) {
         const nextTrackIndex = tracklist.indexOf(currentSong) + 1
-        if (!isPlaying) {
-          dispatch(setIsPlaying(true))
-        }
         dispatch(nextTrack(nextTrackIndex))
       }
 
       if (isShuffle) {
-        const nextTrackIndex = shuffleTrackRandom()
-        dispatch(shuffleTrack(nextTrackIndex))
+        const trackIndex = shuffleTrackRandom()
+        dispatch(shuffleTrack(trackIndex))
       }
     }
   }

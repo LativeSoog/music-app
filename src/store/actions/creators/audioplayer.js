@@ -32,7 +32,7 @@ export const prevTrack = (prevTrackIndex) => ({
   payload: prevTrackIndex,
 })
 
-export const shuffleTrack = (nextTrackIndex) => ({
+export const shuffleTrack = (trackIndex) => ({
   type: SHUFFLE_TRACK,
-  payload: nextTrackIndex,
+  payload: trackIndex,
 })
