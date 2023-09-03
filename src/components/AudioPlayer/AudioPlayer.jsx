@@ -51,6 +51,9 @@ export function AudioPlayer({ loadApp }) {
 
       if (currentTrackIndex > 0) {
         const prevTrackIndex = currentTrackIndex - 1
+        if (!isPlaying) {
+          dispatch(setIsPlaying(true))
+        }
         dispatch(prevTrack(prevTrackIndex))
       }
     }
@@ -62,6 +65,9 @@ export function AudioPlayer({ loadApp }) {
 
       if (currentTrackIndex < tracklist.length - 1) {
         const nextTrackIndex = tracklist.indexOf(currentSong) + 1
+        if (!isPlaying) {
+          dispatch(setIsPlaying(true))
+        }
         dispatch(nextTrack(nextTrackIndex))
       }
 
@@ -137,7 +143,11 @@ export function AudioPlayer({ loadApp }) {
                 </S.PlayerBtnRepeat>
                 <S.PlayerBtnShuffle onClick={() => btnBarShuffle()}>
                   <S.PlayerBtnShuffleSvg alt="shuffle">
-                    <use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
+                    <use
+                      xlinkHref={`img/icon/sprite.svg#icon-${
+                        isShuffle ? 'shuffle-active' : 'shuffle'
+                      }`}
+                    ></use>
                   </S.PlayerBtnShuffleSvg>
                 </S.PlayerBtnShuffle>
               </S.PlayerControls>
