@@ -115,6 +115,7 @@ export const PlayerControls = styled.div`
 export const PlayerBtnPrev = styled.div`
   ${playerBtnMixin};
   margin-right: 23px;
+  cursor: pointer;
 `
 export const PlayerBtnPrevSvg = styled.svg`
   width: 15px;
@@ -137,6 +138,7 @@ export const PlayerBtnNext = styled.div`
   ${playerBtnMixin};
   margin-right: 28px;
   fill: #a53939;
+  cursor: pointer;
 `
 
 export const PlayerBtnNextSvg = styled.svg`
