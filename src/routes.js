@@ -8,13 +8,7 @@ import { CategoryPage } from './pages/Category/CategoryPage.jsx'
 import { ProtectedRoute } from './protectedRoute.js'
 import { UserContext, useUserContext } from './contexts/userContext.jsx'
 
-export const AppRoutes = ({
-  setUser,
-  currentSong,
-  setCurrentSong,
-  trackListAll,
-  isErrorApp,
-}) => {
+export const AppRoutes = ({ setUser, isErrorApp }) => {
   const user = useUserContext(UserContext)
   return (
     <Routes>
@@ -24,15 +18,7 @@ export const AppRoutes = ({
         <Route path="/favorites" element={<FavoritesPage />} />
         <Route
           path="/"
-          element={
-            <MainPage
-              setUser={setUser}
-              currentSong={currentSong}
-              setCurrentSong={setCurrentSong}
-              trackListAll={trackListAll}
-              isErrorApp={isErrorApp}
-            />
-          }
+          element={<MainPage setUser={setUser} isErrorApp={isErrorApp} />}
         />
         <Route path="/category/:id" element={<CategoryPage />} />
       </Route>

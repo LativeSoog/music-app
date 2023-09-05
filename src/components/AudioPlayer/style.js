@@ -115,6 +115,7 @@ export const PlayerControls = styled.div`
 export const PlayerBtnPrev = styled.div`
   ${playerBtnMixin};
   margin-right: 23px;
+  cursor: pointer;
 `
 export const PlayerBtnPrevSvg = styled.svg`
   width: 15px;
@@ -137,6 +138,7 @@ export const PlayerBtnNext = styled.div`
   ${playerBtnMixin};
   margin-right: 28px;
   fill: #a53939;
+  cursor: pointer;
 `
 
 export const PlayerBtnNextSvg = styled.svg`
@@ -166,7 +168,7 @@ export const PlayerBtnRepeatSvg = styled.svg`
   stroke: #696969;
 `
 
-export const PlayerBtnSnuffle = styled.div`
+export const PlayerBtnShuffle = styled.div`
   ${playerBtnMixin};
   display: flex;
   align-items: center;
@@ -180,7 +182,7 @@ export const PlayerBtnSnuffle = styled.div`
   }
 `
 
-export const PlayerBtnSnuffleSvg = styled.svg`
+export const PlayerBtnShuffleSvg = styled.svg`
   width: 19px;
   height: 12px;
   fill: transparent;

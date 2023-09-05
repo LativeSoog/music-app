@@ -3,19 +3,19 @@ import { AppRoutes } from './routes.js'
 import { useState, useEffect } from 'react'
 import { getAllTrack } from './api.js'
 import { UserContext } from './contexts/userContext.jsx'
+import { useDispatch } from 'react-redux'
+import { getTrackListAll } from './store/actions/creators/audioplayer.js'
 
 function App() {
-  // const User = window.localStorage.getItem('user')
-
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
   const [isErrorApp, setIsErrorApp] = useState(false)
-  const [currentSong, setCurrentSong] = useState(false)
-  const [trackListAll, setTrackListAll] = useState([])
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     try {
       getAllTrack().then((trackList) => {
-        setTrackListAll(trackList)
+        dispatch(getTrackListAll(trackList))
       })
     } catch (error) {
       setIsErrorApp(true)
@@ -29,9 +29,6 @@ function App() {
         <AppRoutes
           setUser={setUser}
           isErrorApp={isErrorApp}
-          currentSong={currentSong}
-          setCurrentSong={setCurrentSong}
-          trackListAll={trackListAll}
         />
       </UserContext.Provider>
     </>

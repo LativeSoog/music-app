@@ -1,29 +1,83 @@
 import { useEffect, useRef, useState } from 'react'
 import * as S from './style.js'
 import { ProgressBar } from './ProgressBar.jsx'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  audioPlayerCurrentSong,
+  audioPlayerGetTrackList,
+  audioPlayerIsPlaying,
+} from '../../store/selectors/audioplayer.js'
+import {
+  nextTrack,
+  prevTrack,
+  setIsPlaying,
+  shuffleTrack,
+} from '../../store/actions/creators/audioplayer.js'
 
-export function AudioPlayer({ loadApp, currentSong }) {
+export function AudioPlayer({ loadApp }) {
   const audioRef = useRef(null)
-  const [isPlaying, setIsPlaying] = useState(false)
   const [isRepeat, setIsRepeat] = useState(false)
+  const [isShuffle, setIsShuffle] = useState(false)
+
+  const currentSong = useSelector(audioPlayerCurrentSong)
+  const isPlaying = useSelector(audioPlayerIsPlaying)
+  const tracklist = useSelector(audioPlayerGetTrackList)
+
+  const dispatch = useDispatch()
+
+  const shuffleTrackRandom = () => {
+    const randomIndexTrack =
+      Math.floor(Math.random() * (tracklist.length - 1 - 0 + 1)) + 0
+    return randomIndexTrack
+  }
 
   const btnBarPlay = () => {
-    setIsPlaying(true)
     audioRef.current?.play()
+    if (!isPlaying) {
+      dispatch(setIsPlaying(true))
+    }
   }
 
   const btnBarPause = () => {
     audioRef.current.pause()
-    setIsPlaying(false)
   }
   useEffect(btnBarPlay, [currentSong])
 
+  const btnBarPlayback = () => {
+    isPlaying ? btnBarPause() : btnBarPlay()
+    dispatch(setIsPlaying(isPlaying ? false : true))
+  }
+
   const btnBarPrev = () => {
-    alert('Ещё не реализовано')
+    if (currentSong) {
+      const currentTrackIndex = tracklist.indexOf(currentSong)
+
+      if (currentTrackIndex > 0) {
+        const prevTrackIndex = currentTrackIndex - 1
+        dispatch(prevTrack(prevTrackIndex))
+      }
+
+      if (isShuffle) {
+        const trackIndex = shuffleTrackRandom()
+        dispatch(shuffleTrack(trackIndex))
+      }
+    }
   }
 
   const btnBarNext = () => {
-    alert('Ещё не реализовано')
+    if (currentSong) {
+      const currentTrackIndex = tracklist.indexOf(currentSong)
+
+      if (currentTrackIndex < tracklist.length - 1) {
+        const nextTrackIndex = tracklist.indexOf(currentSong) + 1
+        dispatch(nextTrack(nextTrackIndex))
+      }
+
+      if (isShuffle) {
+        const trackIndex = shuffleTrackRandom()
+        dispatch(shuffleTrack(trackIndex))
+      }
+    }
   }
 
   const btnBarRepeat = () => {
@@ -31,8 +85,8 @@ export function AudioPlayer({ loadApp, currentSong }) {
     isRepeat ? (audioRef.current.loop = false) : (audioRef.current.loop = true)
   }
 
-  const btnBarSnuffle = () => {
-    alert('Ещё не реализовано')
+  const btnBarShuffle = () => {
+    isShuffle ? setIsShuffle(false) : setIsShuffle(true)
   }
 
   const btnBarVolume = (event) => {
@@ -44,17 +98,16 @@ export function AudioPlayer({ loadApp, currentSong }) {
 
   const endTrack = () => {
     if (!isRepeat) {
-      setIsPlaying(false)
+      btnBarNext()
     }
   }
 
   return (
-    currentSong && (
+    currentSong.id && (
       <S.Bar>
-        {/* <audio controls src={currentSong.link} ref={audioRef}></audio> */}
         <S.AudioComponent
           ref={audioRef}
-          src={currentSong.link}
+          src={currentSong.track_file}
           onEnded={endTrack}
         ></S.AudioComponent>
         <S.BarContent>
@@ -67,7 +120,7 @@ export function AudioPlayer({ loadApp, currentSong }) {
                     <use xlinkHref="img/icon/sprite.svg#icon-prev"></use>
                   </S.PlayerBtnPrevSvg>
                 </S.PlayerBtnPrev>
-                <S.PlayerBtnPlay onClick={isPlaying ? btnBarPause : btnBarPlay}>
+                <S.PlayerBtnPlay onClick={btnBarPlayback}>
                   <S.PlayerBtnPlaySvg alt="play">
                     <use
                       xlinkHref={`../img/icon/sprite.svg#icon-${
@@ -90,11 +143,15 @@ export function AudioPlayer({ loadApp, currentSong }) {
                     ></use>
                   </S.PlayerBtnRepeatSvg>
                 </S.PlayerBtnRepeat>
-                <S.PlayerBtnSnuffle onClick={btnBarSnuffle}>
-                  <S.PlayerBtnSnuffleSvg alt="shuffle">
-                    <use xlinkHref="img/icon/sprite.svg#icon-shuffle"></use>
-                  </S.PlayerBtnSnuffleSvg>
-                </S.PlayerBtnSnuffle>
+                <S.PlayerBtnShuffle onClick={() => btnBarShuffle()}>
+                  <S.PlayerBtnShuffleSvg alt="shuffle">
+                    <use
+                      xlinkHref={`img/icon/sprite.svg#icon-${
+                        isShuffle ? 'shuffle-active' : 'shuffle'
+                      }`}
+                    ></use>
+                  </S.PlayerBtnShuffleSvg>
+                </S.PlayerBtnShuffle>
               </S.PlayerControls>
 
               <S.PlayerTrackPlay>
@@ -107,7 +164,7 @@ export function AudioPlayer({ loadApp, currentSong }) {
                     </S.TrackPlayImage>
                     <S.TrackPlayAuthor>
                       <S.TrackPlayAuthorLink href="http://">
-                        {currentSong.title}
+                        {currentSong.name}
                       </S.TrackPlayAuthorLink>
                     </S.TrackPlayAuthor>
                     <S.TrackPlayAlbum>
