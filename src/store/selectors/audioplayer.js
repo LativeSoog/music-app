@@ -6,7 +6,7 @@ export const audioPlayerGetTrackList = (store) =>
   audioPlayerSelector(store)?.tracklist
 
 export const audioPlayerCurrentPlaylist = (store) =>
-  audioPlayerSelector(store)?.playlist
+  audioPlayerSelector(store)?.currentPlaylist
 
 export const audioPlayerCurrentSong = (store) =>
   audioPlayerSelector(store)?.currentSong || []

@@ -12,7 +12,7 @@ import {
 const initialState = {
   isLoading: false,
   isPlaying: false,
-  currentPlaylist: 0,
+  currentPlaylist: false,
   tracklist: [],
   currentSong: {},
 }
