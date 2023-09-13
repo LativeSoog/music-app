@@ -1,4 +1,4 @@
-const host = 'https://painassasin.online/'
+const host = 'https://skypro-music-api.skyeng.tech/'
 let catalog = ''
 
 export const getAllTrack = async () => {

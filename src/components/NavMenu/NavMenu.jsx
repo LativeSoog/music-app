@@ -24,7 +24,13 @@ export function NavMenu({ setUser }) {
           <S.MenuList>
             <NavMenuItem link="/" text="Главное" />
             <NavMenuItem link="/favorites" text="Мой плейлист" />
-            <NavMenuItem link="/login" text="Выйти" onClick={btnLogout()} />
+            <NavMenuItem
+              link="/login"
+              text="Выйти"
+              onClick={() => {
+                btnLogout
+              }}
+            />
           </S.MenuList>
         </S.NavMenu>
       )}
