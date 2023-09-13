@@ -20,9 +20,9 @@ export const AppRoutes = ({ setUser, isErrorApp }) => {
         element={<PageLayout setUser={setUser} isErrorApp={isErrorApp} />}
       >
         <Route element={<ProtectedRoute isAllowed={Boolean(user)} />}>
-          <Route path="/favorites" element={<FavoritesPage />} />
-          <Route path="/" element={<MainPage />} />
-          <Route path="/category/:id" element={<CategoryPage />} />
+          <Route index element={<MainPage />} />
+          <Route path="favorites" element={<FavoritesPage />} />
+          <Route path="category/:id" element={<CategoryPage />} />
         </Route>
       </Route>
 

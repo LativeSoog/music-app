@@ -3,6 +3,7 @@ import {
   IS_LOADING_APP,
   NEXT_TRACK,
   PREV_TRACK,
+  SET_CURRENT_PLAYLIST,
   SET_CURRENT_SONG,
   SET_IS_PLAYING,
   SHUFFLE_TRACK,
@@ -16,6 +17,11 @@ export const isLoadingApp = (status) => ({
 export const getTrackListAll = (tracklist) => ({
   type: GET_TRACK_LIST_ALL,
   payload: tracklist,
+})
+
+export const selectCurrentPlayList = (playlist) => ({
+  type: SET_CURRENT_PLAYLIST,
+  payload: playlist,
 })
 
 export const selectCurrentSong = (track) => ({
