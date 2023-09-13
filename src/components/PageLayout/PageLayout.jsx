@@ -5,9 +5,12 @@ import { Sidebar } from '../Sidebar/Sidebar.jsx'
 import { AudioPlayer } from '../AudioPlayer/AudioPlayer.jsx'
 import { UserContext } from '../../contexts/userContext.jsx'
 import { useContext } from 'react'
+import { useSelector } from 'react-redux'
+import { appIsLoading } from '../../store/selectors/audioplayer.js'
 
-export function PageLayout({ setUser, loadApp }) {
+export function PageLayout({ setUser }) {
   const user = useContext(UserContext)
+  const isLoading = useSelector(appIsLoading)
 
   return (
     <S.Wrapper>
@@ -17,9 +20,9 @@ export function PageLayout({ setUser, loadApp }) {
 
           <Outlet />
 
-          <Sidebar loadApp={loadApp} user={user} />
+          <Sidebar loadApp={isLoading} user={user} />
         </S.Main>
-        <AudioPlayer loadApp={loadApp} />
+        <AudioPlayer loadApp={isLoading} />
         <S.Footer></S.Footer>
       </S.Container>
     </S.Wrapper>

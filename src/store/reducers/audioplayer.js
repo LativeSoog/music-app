@@ -1,5 +1,6 @@
 import {
   GET_TRACK_LIST_ALL,
+  IS_LOADING_APP,
   NEXT_TRACK,
   PREV_TRACK,
   SET_CURRENT_SONG,
@@ -8,6 +9,7 @@ import {
 } from '../actions/type/audioplayer'
 
 const initialState = {
+  isLoading: false,
   isPlaying: false,
   tracklist: [],
   currentSong: {},
@@ -15,6 +17,12 @@ const initialState = {
 
 export default function audioPlayerReducer(state = initialState, action) {
   switch (action.type) {
+    case IS_LOADING_APP:
+      return {
+        ...state,
+        isLoading: action.payload,
+      }
+
     case GET_TRACK_LIST_ALL:
       return {
         ...state,

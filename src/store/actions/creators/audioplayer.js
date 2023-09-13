@@ -1,11 +1,17 @@
 import {
   GET_TRACK_LIST_ALL,
+  IS_LOADING_APP,
   NEXT_TRACK,
   PREV_TRACK,
   SET_CURRENT_SONG,
   SET_IS_PLAYING,
   SHUFFLE_TRACK,
 } from '../type/audioplayer'
+
+export const isLoadingApp = (status) => ({
+  type: IS_LOADING_APP,
+  payload: status,
+})
 
 export const getTrackListAll = (tracklist) => ({
   type: GET_TRACK_LIST_ALL,

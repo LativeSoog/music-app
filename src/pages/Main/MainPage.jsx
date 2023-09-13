@@ -1,14 +1,9 @@
-import { useEffect, useState } from 'react'
 import { SectionTrackList } from '../../components/TrackList/SectionTrackList.jsx'
+import { useSelector } from 'react-redux'
+import { appIsLoading } from '../../store/selectors/audioplayer.js'
 
 export const MainPage = ({ isErrorApp }) => {
-  const [loadApp, setLoadingApp] = useState(false)
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoadingApp(true)
-    }, 2000)
-    return () => clearTimeout(timer)
-  }, [])
+  const isLoading = useSelector(appIsLoading)
 
-  return <SectionTrackList loadApp={loadApp} isErrorApp={isErrorApp} />
+  return <SectionTrackList loadApp={isLoading} isErrorApp={isErrorApp} />
 }
