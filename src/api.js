@@ -56,3 +56,24 @@ export const authUserApi = async ({ email, password }) => {
     }
   })
 }
+
+export const getUserAccessToken = async ({ email, password }) => {
+  catalog = 'user/token/'
+
+  return fetch(host + catalog, {
+    method: 'POST',
+    body: JSON.stringify({
+      email: email,
+      password: password,
+    }),
+    headers: {
+      'content-type': 'application/json',
+    },
+  }).then((response) => {
+    if (response.ok) {
+      return response.json()
+    } else {
+      throw new Error('Произошла ошибка при получении токена')
+    }
+  })
+}

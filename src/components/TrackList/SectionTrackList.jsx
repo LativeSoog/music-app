@@ -7,7 +7,6 @@ import { audioPlayerCurrentPlaylist } from '../../store/selectors/audioplayer.js
 
 export function SectionTrackList({ loadApp, isErrorApp }) {
   const currentPlaylist = useSelector(audioPlayerCurrentPlaylist)
-  console.log(loadApp)
 
   return (
     <S.MainCenterBlock>
