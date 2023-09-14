@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-const userAcessToken = JSON.parse(localStorage.getItem('user'))
+const userAccessToken = JSON.parse(localStorage.getItem('user'))
 
 export const audioPlayerApi = createApi({
   reducerPath: 'audioPlayerApi',
@@ -13,7 +13,7 @@ export const audioPlayerApi = createApi({
         url: 'catalog/track/favorite/all',
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${userAcessToken.token.access}`,
+          Authorization: `Bearer ${userAccessToken.token.access}`,
         },
       }),
     }),

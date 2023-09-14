@@ -1,12 +1,23 @@
 import { useState } from 'react'
 import * as S from './style.js'
+import { useDispatch } from 'react-redux'
+import { selectCurrentPlayList } from '../../store/actions/creators/audioplayer.js'
 
-export function NavMenu({ setUser }) {
+export function NavMenu() {
   const [visible, setVisible] = useState(false)
+  const dispatch = useDispatch()
   const toggleButton = () => setVisible(!visible)
 
   const btnLogout = () => {
     window.localStorage.removeItem('user')
+  }
+
+  const changeFavoritePlayList = () => {
+    dispatch(selectCurrentPlayList(1))
+  }
+
+  const changeDefaultPlayList = () => {
+    dispatch(selectCurrentPlayList(false))
   }
 
   return (
@@ -22,15 +33,17 @@ export function NavMenu({ setUser }) {
       {visible && (
         <S.NavMenu>
           <S.MenuList>
-            <NavMenuItem link="/" text="Главное" />
-            <NavMenuItem link="/favorites" text="Мой плейлист" />
             <NavMenuItem
-              link="/login"
-              text="Выйти"
-              onClick={() => {
-                btnLogout
-              }}
+              link="/"
+              text="Главное"
+              function={changeDefaultPlayList}
             />
+            <NavMenuItem
+              link="/favorites"
+              text="Мой плейлист"
+              function={changeFavoritePlayList}
+            />
+            <NavMenuItem link="/login" text="Выйти" function={btnLogout} />
           </S.MenuList>
         </S.NavMenu>
       )}
@@ -45,7 +58,9 @@ function NavBurger(props) {
 function NavMenuItem(props) {
   return (
     <S.MenuItem>
-      <S.MenuLink to={props.link}>{props.text}</S.MenuLink>
+      <S.MenuLink onClick={props.function} to={props.link}>
+        {props.text}
+      </S.MenuLink>
     </S.MenuItem>
   )
 }

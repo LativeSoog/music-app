@@ -13,6 +13,8 @@ function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
   const [isErrorApp, setIsErrorApp] = useState(false)
 
+  console.log(user)
+
   const dispatch = useDispatch()
 
   useEffect(() => {
