@@ -5,11 +5,31 @@ import {
   audioPlayerCurrentSong,
   audioPlayerIsPlaying,
 } from '../../store/selectors/audioplayer.js'
+import {
+  useAddedFavoriteTrackMutation,
+  useDeleteFavoriteTrackMutation,
+} from '../../services/audioplayer.js'
+import { UserContext, useUserContext } from '../../contexts/userContext.jsx'
 
 export function Track({ title, titleSpan, link, author, album, time, track }) {
   const currentSong = useSelector(audioPlayerCurrentSong)
   const isPlaying = useSelector(audioPlayerIsPlaying)
   const dispatch = useDispatch()
+
+  const user = useUserContext(UserContext)
+
+  const handleLike = (e, id) => {
+    e.stopPropagation()
+    addTrackToFavorite(id)
+  }
+
+  const handleDislike = (e, id) => {
+    e.stopPropagation()
+    deleteTrackToFavorite(id)
+  }
+
+  const [addTrackToFavorite] = useAddedFavoriteTrackMutation()
+  const [deleteTrackToFavorite] = useDeleteFavoriteTrackMutation()
 
   return (
     <S.PlaylistItem>
@@ -43,9 +63,25 @@ export function Track({ title, titleSpan, link, author, album, time, track }) {
           <S.TrackAlbumLink href={link}>{album}</S.TrackAlbumLink>
         </S.TrackAlbum>
         <S.TrackTime>
-          <S.TrackTimeSvg alt="time">
-            <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
-          </S.TrackTimeSvg>
+          {track.stared_user?.find((userLike) => userLike.id === user.id) ? (
+            <S.TrackTimeSvgLiked
+              alt="time"
+              onClick={(e) => {
+                handleDislike(e, track.id)
+              }}
+            >
+              <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
+            </S.TrackTimeSvgLiked>
+          ) : (
+            <S.TrackTimeSvg
+              alt="time"
+              onClick={(e) => {
+                handleLike(e, track.id)
+              }}
+            >
+              <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
+            </S.TrackTimeSvg>
+          )}
           <S.TrackTimeText>{time}</S.TrackTimeText>
         </S.TrackTime>
       </S.PlaylistTrack>

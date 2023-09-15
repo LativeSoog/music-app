@@ -17,7 +17,29 @@ export const audioPlayerApi = createApi({
         },
       }),
     }),
+    addedFavoriteTrack: build.mutation({
+      query: (id) => ({
+        url: `catalog/track/${id}/favorite/`,
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${userAccessToken.token.access}`,
+        },
+      }),
+    }),
+    deleteFavoriteTrack: build.mutation({
+      query: (id) => ({
+        url: `catalog/track/${id}/favorite/`,
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${userAccessToken.token.access}`,
+        },
+      }),
+    }),
   }),
 })
 
-export const { useGetFavoriteTrackQuery } = audioPlayerApi
+export const {
+  useGetFavoriteTrackQuery,
+  useAddedFavoriteTrackMutation,
+  useDeleteFavoriteTrackMutation,
+} = audioPlayerApi
