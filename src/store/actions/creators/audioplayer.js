@@ -1,5 +1,6 @@
 import {
   IS_LOADING_APP,
+  SET_ACTIVE_PLAYLIST,
   SET_CURRENT_PLAYLIST,
   SET_CURRENT_SONG,
   SET_IS_PLAYING,
@@ -13,6 +14,11 @@ export const isLoadingApp = (status) => ({
 export const selectCurrentPlayList = (playlist) => ({
   type: SET_CURRENT_PLAYLIST,
   payload: playlist,
+})
+
+export const setActivePlayList = (activePlaylist) => ({
+  type: SET_ACTIVE_PLAYLIST,
+  payload: activePlaylist,
 })
 
 export const selectCurrentSong = (track) => ({

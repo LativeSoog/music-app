@@ -1,22 +1,33 @@
 import { useDispatch, useSelector } from 'react-redux'
 import * as S from './style.js'
-import { selectCurrentSong } from '../../store/actions/creators/audioplayer.js'
 import {
+  selectCurrentSong,
+  setActivePlayList,
+} from '../../store/actions/creators/audioplayer.js'
+import {
+  audioPlayerCurrentPlaylist,
   audioPlayerCurrentSong,
   audioPlayerIsPlaying,
 } from '../../store/selectors/audioplayer.js'
 import {
   useAddedFavoriteTrackMutation,
   useDeleteFavoriteTrackMutation,
+  useGetAllTrackQuery,
+  useGetFavoriteTrackQuery,
 } from '../../services/audioplayer.js'
 import { UserContext, useUserContext } from '../../contexts/userContext.jsx'
 
 export function Track({ title, titleSpan, link, author, album, time, track }) {
   const currentSong = useSelector(audioPlayerCurrentSong)
   const isPlaying = useSelector(audioPlayerIsPlaying)
+  const currentPlaylist = useSelector(audioPlayerCurrentPlaylist)
   const dispatch = useDispatch()
 
   const user = useUserContext(UserContext)
+
+  const { data: trackList } = currentPlaylist
+    ? useGetFavoriteTrackQuery()
+    : useGetAllTrackQuery()
 
   const handleLike = (e, id) => {
     e.stopPropagation()
@@ -36,6 +47,7 @@ export function Track({ title, titleSpan, link, author, album, time, track }) {
       <S.PlaylistTrack
         onClick={() => {
           dispatch(selectCurrentSong(track))
+          dispatch(setActivePlayList(trackList))
         }}
       >
         <S.TrackTitle>

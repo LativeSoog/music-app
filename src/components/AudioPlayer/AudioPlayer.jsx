@@ -5,20 +5,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   audioPlayerCurrentPlaylist,
   audioPlayerCurrentSong,
-  audioPlayerGetTrackList,
   audioPlayerIsPlaying,
+  audioPlayerSetActivePlaylist,
 } from '../../store/selectors/audioplayer.js'
 import {
-  nextTrack,
-  prevTrack,
   selectCurrentSong,
   setIsPlaying,
-  shuffleTrack,
 } from '../../store/actions/creators/audioplayer.js'
-import {
-  useGetAllTrackQuery,
-  useGetFavoriteTrackQuery,
-} from '../../services/audioplayer.js'
 
 export function AudioPlayer({ loadApp }) {
   const audioRef = useRef(null)
@@ -27,11 +20,7 @@ export function AudioPlayer({ loadApp }) {
 
   const currentSong = useSelector(audioPlayerCurrentSong)
   const isPlaying = useSelector(audioPlayerIsPlaying)
-  const currentPlaylist = useSelector(audioPlayerCurrentPlaylist)
-
-  const { data: tracklist } = currentPlaylist
-    ? useGetFavoriteTrackQuery()
-    : useGetAllTrackQuery()
+  const tracklist = useSelector(audioPlayerSetActivePlaylist)
 
   const dispatch = useDispatch()
 
