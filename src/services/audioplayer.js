@@ -1,6 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-const userAccessToken = JSON.parse(localStorage.getItem('user'))
+const userAccessToken = () => {
+  const accessToken = JSON.parse(localStorage.getItem('user'))
+  return accessToken.token.access
+}
 
 const DATA_TAG = { type: 'Tracks', id: 'LIST' }
 
@@ -22,7 +25,7 @@ export const audioPlayerApi = createApi({
         url: 'catalog/track/favorite/all',
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${userAccessToken.token.access}`,
+          Authorization: `Bearer ${userAccessToken()}`,
         },
       }),
       providesTags: (result = []) => [DATA_TAG],
@@ -32,7 +35,7 @@ export const audioPlayerApi = createApi({
         url: `catalog/track/${id}/favorite/`,
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${userAccessToken.token.access}`,
+          Authorization: `Bearer ${userAccessToken()}`,
         },
       }),
       invalidatesTags: [DATA_TAG],
@@ -42,7 +45,7 @@ export const audioPlayerApi = createApi({
         url: `catalog/track/${id}/favorite/`,
         method: 'DELETE',
         headers: {
-          Authorization: `Bearer ${userAccessToken.token.access}`,
+          Authorization: `Bearer ${userAccessToken()}`,
         },
       }),
       invalidatesTags: [DATA_TAG],
