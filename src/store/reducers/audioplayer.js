@@ -1,19 +1,14 @@
 import {
-  GET_TRACK_LIST_ALL,
   IS_LOADING_APP,
-  NEXT_TRACK,
-  PREV_TRACK,
   SET_CURRENT_PLAYLIST,
   SET_CURRENT_SONG,
   SET_IS_PLAYING,
-  SHUFFLE_TRACK,
 } from '../actions/type/audioplayer'
 
 const initialState = {
   isLoading: false,
   isPlaying: false,
   currentPlaylist: false,
-  tracklist: [],
   currentSong: {},
 }
 
@@ -23,12 +18,6 @@ export default function audioPlayerReducer(state = initialState, action) {
       return {
         ...state,
         isLoading: action.payload,
-      }
-
-    case GET_TRACK_LIST_ALL:
-      return {
-        ...state,
-        tracklist: action.payload,
       }
 
     case SET_CURRENT_PLAYLIST:
@@ -48,24 +37,6 @@ export default function audioPlayerReducer(state = initialState, action) {
       return {
         ...state,
         isPlaying: action.payload,
-      }
-
-    case NEXT_TRACK:
-      return {
-        ...state,
-        currentSong: state.tracklist[action.payload],
-      }
-
-    case PREV_TRACK:
-      return {
-        ...state,
-        currentSong: state.tracklist[action.payload],
-      }
-
-    case SHUFFLE_TRACK:
-      return {
-        ...state,
-        currentSong: state.tracklist[action.payload],
       }
 
     default:

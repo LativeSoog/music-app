@@ -17,15 +17,15 @@ function App() {
 
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    try {
-      getAllTrack().then((trackList) => {
-        dispatch(getTrackListAll(trackList))
-      })
-    } catch (error) {
-      setIsErrorApp(true)
-    }
-  }, [])
+  // useEffect(() => {
+  //   try {
+  //     getAllTrack().then((trackList) => {
+  //       dispatch(getTrackListAll(trackList))
+  //     })
+  //   } catch (error) {
+  //     setIsErrorApp(true)
+  //   }
+  // }, [])
 
   useEffect(() => {
     const timer = setTimeout(() => {

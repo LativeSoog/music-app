@@ -3,6 +3,7 @@ import * as S from './style.js'
 import { ProgressBar } from './ProgressBar.jsx'
 import { useDispatch, useSelector } from 'react-redux'
 import {
+  audioPlayerCurrentPlaylist,
   audioPlayerCurrentSong,
   audioPlayerGetTrackList,
   audioPlayerIsPlaying,
@@ -10,9 +11,14 @@ import {
 import {
   nextTrack,
   prevTrack,
+  selectCurrentSong,
   setIsPlaying,
   shuffleTrack,
 } from '../../store/actions/creators/audioplayer.js'
+import {
+  useGetAllTrackQuery,
+  useGetFavoriteTrackQuery,
+} from '../../services/audioplayer.js'
 
 export function AudioPlayer({ loadApp }) {
   const audioRef = useRef(null)
@@ -21,7 +27,11 @@ export function AudioPlayer({ loadApp }) {
 
   const currentSong = useSelector(audioPlayerCurrentSong)
   const isPlaying = useSelector(audioPlayerIsPlaying)
-  const tracklist = useSelector(audioPlayerGetTrackList)
+  const currentPlaylist = useSelector(audioPlayerCurrentPlaylist)
+
+  const { data: tracklist } = currentPlaylist
+    ? useGetFavoriteTrackQuery()
+    : useGetAllTrackQuery()
 
   const dispatch = useDispatch()
 
@@ -53,13 +63,14 @@ export function AudioPlayer({ loadApp }) {
       const currentTrackIndex = tracklist.indexOf(currentSong)
 
       if (currentTrackIndex > 0) {
-        const prevTrackIndex = currentTrackIndex - 1
-        dispatch(prevTrack(prevTrackIndex))
+        const prevTrack = tracklist[currentTrackIndex - 1]
+        dispatch(selectCurrentSong(prevTrack))
       }
 
       if (isShuffle) {
         const trackIndex = shuffleTrackRandom()
-        dispatch(shuffleTrack(trackIndex))
+        const prevTrack = tracklist[trackIndex]
+        dispatch(selectCurrentSong(prevTrack))
       }
     }
   }
@@ -69,13 +80,14 @@ export function AudioPlayer({ loadApp }) {
       const currentTrackIndex = tracklist.indexOf(currentSong)
 
       if (currentTrackIndex < tracklist.length - 1) {
-        const nextTrackIndex = tracklist.indexOf(currentSong) + 1
-        dispatch(nextTrack(nextTrackIndex))
+        const nextTrack = tracklist[currentTrackIndex + 1]
+        dispatch(selectCurrentSong(nextTrack))
       }
 
       if (isShuffle) {
         const trackIndex = shuffleTrackRandom()
-        dispatch(shuffleTrack(trackIndex))
+        const nextTrack = tracklist[trackIndex]
+        dispatch(selectCurrentSong(nextTrack))
       }
     }
   }

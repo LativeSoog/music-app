@@ -2,9 +2,6 @@ const audioPlayerSelector = (store) => store.AudioPlayer
 
 export const appIsLoading = (store) => audioPlayerSelector(store)?.isLoading
 
-export const audioPlayerGetTrackList = (store) =>
-  audioPlayerSelector(store)?.tracklist
-
 export const audioPlayerCurrentPlaylist = (store) =>
   audioPlayerSelector(store)?.currentPlaylist
 
