@@ -118,7 +118,7 @@ export function AudioPlayer({ loadApp }) {
               <S.PlayerControls>
                 <S.PlayerBtnPrev onClick={btnBarPrev}>
                   <S.PlayerBtnPrevSvg alt="prev">
-                    <use xlinkHref="img/icon/sprite.svg#icon-prev"></use>
+                    <use xlinkHref="/img/icon/sprite.svg#icon-prev"></use>
                   </S.PlayerBtnPrevSvg>
                 </S.PlayerBtnPrev>
                 <S.PlayerBtnPlay onClick={btnBarPlayback}>
@@ -132,13 +132,13 @@ export function AudioPlayer({ loadApp }) {
                 </S.PlayerBtnPlay>
                 <S.PlayerBtnNext onClick={btnBarNext}>
                   <S.PlayerBtnNextSvg alt="next">
-                    <use xlinkHref="img/icon/sprite.svg#icon-next"></use>
+                    <use xlinkHref="/img/icon/sprite.svg#icon-next"></use>
                   </S.PlayerBtnNextSvg>
                 </S.PlayerBtnNext>
                 <S.PlayerBtnRepeat onClick={btnBarRepeat}>
                   <S.PlayerBtnRepeatSvg alt="repeat">
                     <use
-                      xlinkHref={`img/icon/sprite.svg#icon-${
+                      xlinkHref={`/img/icon/sprite.svg#icon-${
                         isRepeat ? 'repeat-active' : 'repeat'
                       }`}
                     ></use>
@@ -147,7 +147,7 @@ export function AudioPlayer({ loadApp }) {
                 <S.PlayerBtnShuffle onClick={() => btnBarShuffle()}>
                   <S.PlayerBtnShuffleSvg alt="shuffle">
                     <use
-                      xlinkHref={`img/icon/sprite.svg#icon-${
+                      xlinkHref={`/img/icon/sprite.svg#icon-${
                         isShuffle ? 'shuffle-active' : 'shuffle'
                       }`}
                     ></use>
@@ -160,7 +160,7 @@ export function AudioPlayer({ loadApp }) {
                   <S.TrackPlayContain>
                     <S.TrackPlayImage>
                       <S.TrackPlaySvg alt="music">
-                        <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
+                        <use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
                       </S.TrackPlaySvg>
                     </S.TrackPlayImage>
                     <S.TrackPlayAuthor>
@@ -196,7 +196,7 @@ export function AudioPlayer({ loadApp }) {
               <S.VolumeContent>
                 <S.VolumeImage>
                   <S.VolumeSvg alt="volume">
-                    <use xlinkHref="img/icon/sprite.svg#icon-volume"></use>
+                    <use xlinkHref="/img/icon/sprite.svg#icon-volume"></use>
                   </S.VolumeSvg>
                 </S.VolumeImage>
                 <S.VolumeProgress>

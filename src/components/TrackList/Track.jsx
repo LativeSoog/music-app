@@ -76,7 +76,7 @@ export function Track({ title, titleSpan, link, author, album, time, track }) {
             )}
 
             <S.TrackTitleSvg alt="music">
-              <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
+              <use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
             </S.TrackTitleSvg>
           </S.TrackTitleImage>
           <S.TrackTitleText>
@@ -100,7 +100,7 @@ export function Track({ title, titleSpan, link, author, album, time, track }) {
                   handleDislike(e, track.id)
                 }}
               >
-                <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
+                <use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
               </S.TrackTimeSvgLiked>
             ) : (
               <S.TrackTimeSvg
@@ -109,7 +109,7 @@ export function Track({ title, titleSpan, link, author, album, time, track }) {
                   handleLike(e, track.id)
                 }}
               >
-                <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
+                <use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
               </S.TrackTimeSvg>
             )}
             <S.TrackTimeText>{time}</S.TrackTimeText>
@@ -123,7 +123,7 @@ export function Track({ title, titleSpan, link, author, album, time, track }) {
                 handleDislike(e, track.id)
               }}
             >
-              <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
+              <use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
             </S.TrackTimeSvgLiked>
             <S.TrackTimeText>{time}</S.TrackTimeText>
           </S.TrackTime>

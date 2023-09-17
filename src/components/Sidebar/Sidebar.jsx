@@ -14,7 +14,7 @@ export function Sidebar({ user, loadApp }) {
       <S.SidebarPersonal>
         {user && <S.SidebarPersonalName>{user.username}</S.SidebarPersonalName>}
         <S.SidebarLogoutBtn link="/login" onClick={btnLogout}>
-          <use xlinkHref="img/icon/sprite.svg#icon-logout"></use>
+          <use xlinkHref="/img/icon/sprite.svg#icon-logout"></use>
         </S.SidebarLogoutBtn>
       </S.SidebarPersonal>
       <S.SidebarBlock>

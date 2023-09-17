@@ -73,4 +73,5 @@ export const {
   useAddedFavoriteTrackMutation,
   useDeleteFavoriteTrackMutation,
   useGetAllCompilationQuery,
+  useGetCompilationIdQuery,
 } = audioPlayerApi

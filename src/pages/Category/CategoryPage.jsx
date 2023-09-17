@@ -1,20 +1,19 @@
 import { useParams } from 'react-router-dom'
-import { CATEGORIES } from '../../constants'
-import { useGetAllCompilationQuery } from '../../services/audioplayer'
+import {
+  useGetAllCompilationQuery,
+  useGetCompilationIdQuery,
+} from '../../services/audioplayer'
+import { CategorySectionList } from '../../components/Category/CategorySectionList'
 
 export const CategoryPage = () => {
   const params = useParams()
+  const { data: allCategories } = useGetAllCompilationQuery()
 
-  const category = CATEGORIES.find(
+  const currentCategories = allCategories?.find(
     (category) => category.id === Number(params.id),
   )
 
-  const { data: compilation } = useGetAllCompilationQuery()
-  console.log(category)
+  const { data: compilationId } = useGetCompilationIdQuery(1)
 
-  return (
-    <div>
-      <h1>Category Page {category.name}</h1>
-    </div>
-  )
+  return <CategorySectionList params={params} />
 }

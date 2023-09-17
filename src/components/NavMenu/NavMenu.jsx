@@ -23,7 +23,7 @@ export function NavMenu() {
   return (
     <S.MainNav>
       <S.NavLogo>
-        <S.LogoImage src="img/logo.png" alt="logo"></S.LogoImage>
+        <S.LogoImage src="/img/logo.png" alt="logo"></S.LogoImage>
       </S.NavLogo>
       <S.NavBurger onClick={toggleButton}>
         <NavBurger />
