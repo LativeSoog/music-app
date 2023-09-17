@@ -8,6 +8,7 @@ import {
   audioPlayerCurrentPlaylist,
   audioPlayerCurrentSong,
   audioPlayerIsPlaying,
+  audioPlayerSetActivePlaylist,
 } from '../../store/selectors/audioplayer.js'
 import {
   useAddedFavoriteTrackMutation,
@@ -16,12 +17,16 @@ import {
   useGetFavoriteTrackQuery,
 } from '../../services/audioplayer.js'
 import { UserContext, useUserContext } from '../../contexts/userContext.jsx'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export function Track({ title, titleSpan, link, author, album, time, track }) {
   const currentSong = useSelector(audioPlayerCurrentSong)
   const isPlaying = useSelector(audioPlayerIsPlaying)
   const currentPlaylist = useSelector(audioPlayerCurrentPlaylist)
+  const activePlaylist = useSelector(audioPlayerSetActivePlaylist)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const user = useUserContext(UserContext)
 
@@ -39,15 +44,27 @@ export function Track({ title, titleSpan, link, author, album, time, track }) {
     deleteTrackToFavorite(id)
   }
 
-  const [addTrackToFavorite] = useAddedFavoriteTrackMutation()
-  const [deleteTrackToFavorite] = useDeleteFavoriteTrackMutation()
+  const [addTrackToFavorite, { error: errorAddFavorite }] =
+    useAddedFavoriteTrackMutation()
+  const [deleteTrackToFavorite, { error: errorDelFavorite }] =
+    useDeleteFavoriteTrackMutation()
+
+  useEffect(() => {
+    if (errorAddFavorite?.status === 401 || errorDelFavorite?.status === 401) {
+      window.localStorage.removeItem('user')
+      navigate('/login')
+    }
+  }, [errorAddFavorite, errorDelFavorite])
 
   return (
     <S.PlaylistItem>
       <S.PlaylistTrack
         onClick={() => {
           dispatch(selectCurrentSong(track))
-          dispatch(setActivePlayList(trackList))
+          {
+            activePlaylist !== trackList &&
+              dispatch(setActivePlayList(trackList))
+          }
         }}
       >
         <S.TrackTitle>
@@ -74,8 +91,32 @@ export function Track({ title, titleSpan, link, author, album, time, track }) {
         <S.TrackAlbum>
           <S.TrackAlbumLink href={link}>{album}</S.TrackAlbumLink>
         </S.TrackAlbum>
-        <S.TrackTime>
-          {track.stared_user?.find((userLike) => userLike.id === user.id) ? (
+        {!currentPlaylist && (
+          <S.TrackTime>
+            {track.stared_user?.find((userLike) => userLike.id === user.id) ? (
+              <S.TrackTimeSvgLiked
+                alt="time"
+                onClick={(e) => {
+                  handleDislike(e, track.id)
+                }}
+              >
+                <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
+              </S.TrackTimeSvgLiked>
+            ) : (
+              <S.TrackTimeSvg
+                alt="time"
+                onClick={(e) => {
+                  handleLike(e, track.id)
+                }}
+              >
+                <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
+              </S.TrackTimeSvg>
+            )}
+            <S.TrackTimeText>{time}</S.TrackTimeText>
+          </S.TrackTime>
+        )}
+        {currentPlaylist === 'favorite' && (
+          <S.TrackTime>
             <S.TrackTimeSvgLiked
               alt="time"
               onClick={(e) => {
@@ -84,18 +125,9 @@ export function Track({ title, titleSpan, link, author, album, time, track }) {
             >
               <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
             </S.TrackTimeSvgLiked>
-          ) : (
-            <S.TrackTimeSvg
-              alt="time"
-              onClick={(e) => {
-                handleLike(e, track.id)
-              }}
-            >
-              <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
-            </S.TrackTimeSvg>
-          )}
-          <S.TrackTimeText>{time}</S.TrackTimeText>
-        </S.TrackTime>
+            <S.TrackTimeText>{time}</S.TrackTimeText>
+          </S.TrackTime>
+        )}
       </S.PlaylistTrack>
     </S.PlaylistItem>
   )

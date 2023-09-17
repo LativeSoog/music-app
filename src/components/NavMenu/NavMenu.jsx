@@ -13,7 +13,7 @@ export function NavMenu() {
   }
 
   const changeFavoritePlayList = () => {
-    dispatch(selectCurrentPlayList(1))
+    dispatch(selectCurrentPlayList('favorite'))
   }
 
   const changeDefaultPlayList = () => {
