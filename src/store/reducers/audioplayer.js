@@ -3,6 +3,7 @@ import {
   SET_ACTIVE_PLAYLIST,
   SET_CURRENT_PLAYLIST,
   SET_CURRENT_SONG,
+  SET_IS_COMPILATION,
   SET_IS_PLAYING,
 } from '../actions/type/audioplayer'
 
@@ -12,6 +13,7 @@ const initialState = {
   currentPlaylist: false,
   activePlaylist: {},
   currentSong: {},
+  isCompilation: false,
 }
 
 export default function audioPlayerReducer(state = initialState, action) {
@@ -45,6 +47,12 @@ export default function audioPlayerReducer(state = initialState, action) {
       return {
         ...state,
         isPlaying: action.payload,
+      }
+
+    case SET_IS_COMPILATION:
+      return {
+        ...state,
+        isCompilation: action.payload,
       }
 
     default:

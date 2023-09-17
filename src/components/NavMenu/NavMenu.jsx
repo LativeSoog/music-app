@@ -1,12 +1,17 @@
 import { useState } from 'react'
 import * as S from './style.js'
-import { useDispatch } from 'react-redux'
-import { selectCurrentPlayList } from '../../store/actions/creators/audioplayer.js'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  selectCurrentPlayList,
+  setIsCompilation,
+} from '../../store/actions/creators/audioplayer.js'
+import { audioPlayerSetIsCompilation } from '../../store/selectors/audioplayer.js'
 
 export function NavMenu() {
   const [visible, setVisible] = useState(false)
   const dispatch = useDispatch()
   const toggleButton = () => setVisible(!visible)
+  const isCompilation = useSelector(audioPlayerSetIsCompilation)
 
   const btnLogout = () => {
     window.localStorage.removeItem('user')
@@ -14,10 +19,16 @@ export function NavMenu() {
 
   const changeFavoritePlayList = () => {
     dispatch(selectCurrentPlayList('favorite'))
+    if (isCompilation) {
+      dispatch(setIsCompilation(false))
+    }
   }
 
   const changeDefaultPlayList = () => {
     dispatch(selectCurrentPlayList(false))
+    if (isCompilation) {
+      dispatch(setIsCompilation(false))
+    }
   }
 
   return (

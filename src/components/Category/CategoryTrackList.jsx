@@ -10,7 +10,6 @@ const StyledContentPlaylist = styled.div`
 
 export function CategoryTrackList({ params }) {
   const { data: currentCategory } = useGetCompilationIdQuery(Number(params.id))
-  console.log(currentCategory)
 
   return (
     <StyledContentPlaylist>

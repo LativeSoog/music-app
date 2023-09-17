@@ -13,3 +13,6 @@ export const audioPlayerCurrentSong = (store) =>
 
 export const audioPlayerIsPlaying = (store) =>
   audioPlayerSelector(store)?.isPlaying
+
+export const audioPlayerSetIsCompilation = (store) =>
+  audioPlayerSelector(store)?.isCompilation

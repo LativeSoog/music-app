@@ -3,6 +3,7 @@ import {
   SET_ACTIVE_PLAYLIST,
   SET_CURRENT_PLAYLIST,
   SET_CURRENT_SONG,
+  SET_IS_COMPILATION,
   SET_IS_PLAYING,
 } from '../type/audioplayer'
 
@@ -29,4 +30,9 @@ export const selectCurrentSong = (track) => ({
 export const setIsPlaying = (isPlaying) => ({
   type: SET_IS_PLAYING,
   payload: isPlaying,
+})
+
+export const setIsCompilation = (isCompilation) => ({
+  type: SET_IS_COMPILATION,
+  payload: isCompilation,
 })
