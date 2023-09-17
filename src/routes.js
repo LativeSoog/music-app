@@ -7,6 +7,7 @@ import { FavoritesPage } from './pages/Favorites/FavoritesPage.jsx'
 import { CategoryPage } from './pages/Category/CategoryPage.jsx'
 import { ProtectedRoute } from './protectedRoute.js'
 import { UserContext, useUserContext } from './contexts/userContext.jsx'
+import { PageLayout } from './components/PageLayout/PageLayout.jsx'
 
 export const AppRoutes = ({ setUser, isErrorApp }) => {
   const user = useUserContext(UserContext)
@@ -14,13 +15,15 @@ export const AppRoutes = ({ setUser, isErrorApp }) => {
     <Routes>
       <Route path="*" element={<NotFoundPage />} />
 
-      <Route element={<ProtectedRoute isAllowed={Boolean(user)} />}>
-        <Route path="/favorites" element={<FavoritesPage />} />
-        <Route
-          path="/"
-          element={<MainPage setUser={setUser} isErrorApp={isErrorApp} />}
-        />
-        <Route path="/category/:id" element={<CategoryPage />} />
+      <Route
+        path="/"
+        element={<PageLayout setUser={setUser} isErrorApp={isErrorApp} />}
+      >
+        <Route element={<ProtectedRoute isAllowed={Boolean(user)} />}>
+          <Route index element={<MainPage />} />
+          <Route path="favorites" element={<FavoritesPage />} />
+          <Route path="category/:id" element={<CategoryPage />} />
+        </Route>
       </Route>
 
       <Route path="/login" element={<LoginPage setUser={setUser} />} />

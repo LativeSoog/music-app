@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import * as S from './LoginPageStyles.js'
 import { useState } from 'react'
-import { authUserApi } from '../../api.js'
+import { authUserApi, getUserAccessToken } from '../../api.js'
 
 export function LoginPage({ setUser }) {
   const [error, setError] = useState(null)
@@ -15,7 +15,8 @@ export function LoginPage({ setUser }) {
   const checkAndLogin = async () => {
     try {
       setIsLoginProcess(true)
-      const userLoginInfo = await authUserApi({ email, password })
+      let userLoginInfo = await authUserApi({ email, password })
+      userLoginInfo.token = await getUserAccessToken({ email, password })
       localStorage.setItem('user', JSON.stringify(userLoginInfo))
       setUser(userLoginInfo)
       setIsLoginProcess(false)

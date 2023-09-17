@@ -1,15 +1,24 @@
 import {
-  GET_TRACK_LIST_ALL,
-  NEXT_TRACK,
-  PREV_TRACK,
+  IS_LOADING_APP,
+  SET_ACTIVE_PLAYLIST,
+  SET_CURRENT_PLAYLIST,
   SET_CURRENT_SONG,
   SET_IS_PLAYING,
-  SHUFFLE_TRACK,
 } from '../type/audioplayer'
 
-export const getTrackListAll = (tracklist) => ({
-  type: GET_TRACK_LIST_ALL,
-  payload: tracklist,
+export const isLoadingApp = (status) => ({
+  type: IS_LOADING_APP,
+  payload: status,
+})
+
+export const selectCurrentPlayList = (playlist) => ({
+  type: SET_CURRENT_PLAYLIST,
+  payload: playlist,
+})
+
+export const setActivePlayList = (activePlaylist) => ({
+  type: SET_ACTIVE_PLAYLIST,
+  payload: activePlaylist,
 })
 
 export const selectCurrentSong = (track) => ({
@@ -20,19 +29,4 @@ export const selectCurrentSong = (track) => ({
 export const setIsPlaying = (isPlaying) => ({
   type: SET_IS_PLAYING,
   payload: isPlaying,
-})
-
-export const nextTrack = (nextTrackIndex) => ({
-  type: NEXT_TRACK,
-  payload: nextTrackIndex,
-})
-
-export const prevTrack = (prevTrackIndex) => ({
-  type: PREV_TRACK,
-  payload: prevTrackIndex,
-})
-
-export const shuffleTrack = (trackIndex) => ({
-  type: SHUFFLE_TRACK,
-  payload: trackIndex,
 })

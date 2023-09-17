@@ -179,6 +179,14 @@ export const TrackAlbumLink = styled.a`
 
 export const TrackTime = styled.div``
 
+export const TrackTimeSvgLiked = styled.svg`
+  width: 14px;
+  height: 12px;
+  margin-right: 17px;
+  fill: #b672ff;
+  stroke: #b672ff;
+`
+
 export const TrackTimeSvg = styled.svg`
   width: 14px;
   height: 12px;

@@ -3,15 +3,14 @@ import * as S from './style.js'
 import { ProgressBar } from './ProgressBar.jsx'
 import { useDispatch, useSelector } from 'react-redux'
 import {
+  audioPlayerCurrentPlaylist,
   audioPlayerCurrentSong,
-  audioPlayerGetTrackList,
   audioPlayerIsPlaying,
+  audioPlayerSetActivePlaylist,
 } from '../../store/selectors/audioplayer.js'
 import {
-  nextTrack,
-  prevTrack,
+  selectCurrentSong,
   setIsPlaying,
-  shuffleTrack,
 } from '../../store/actions/creators/audioplayer.js'
 
 export function AudioPlayer({ loadApp }) {
@@ -21,7 +20,7 @@ export function AudioPlayer({ loadApp }) {
 
   const currentSong = useSelector(audioPlayerCurrentSong)
   const isPlaying = useSelector(audioPlayerIsPlaying)
-  const tracklist = useSelector(audioPlayerGetTrackList)
+  const tracklist = useSelector(audioPlayerSetActivePlaylist)
 
   const dispatch = useDispatch()
 
@@ -53,13 +52,14 @@ export function AudioPlayer({ loadApp }) {
       const currentTrackIndex = tracklist.indexOf(currentSong)
 
       if (currentTrackIndex > 0) {
-        const prevTrackIndex = currentTrackIndex - 1
-        dispatch(prevTrack(prevTrackIndex))
+        const prevTrack = tracklist[currentTrackIndex - 1]
+        dispatch(selectCurrentSong(prevTrack))
       }
 
       if (isShuffle) {
         const trackIndex = shuffleTrackRandom()
-        dispatch(shuffleTrack(trackIndex))
+        const prevTrack = tracklist[trackIndex]
+        dispatch(selectCurrentSong(prevTrack))
       }
     }
   }
@@ -69,13 +69,14 @@ export function AudioPlayer({ loadApp }) {
       const currentTrackIndex = tracklist.indexOf(currentSong)
 
       if (currentTrackIndex < tracklist.length - 1) {
-        const nextTrackIndex = tracklist.indexOf(currentSong) + 1
-        dispatch(nextTrack(nextTrackIndex))
+        const nextTrack = tracklist[currentTrackIndex + 1]
+        dispatch(selectCurrentSong(nextTrack))
       }
 
       if (isShuffle) {
         const trackIndex = shuffleTrackRandom()
-        dispatch(shuffleTrack(trackIndex))
+        const nextTrack = tracklist[trackIndex]
+        dispatch(selectCurrentSong(nextTrack))
       }
     }
   }
@@ -177,7 +178,7 @@ export function AudioPlayer({ loadApp }) {
                   <AudioPlayerLoading />
                 )}
 
-                <S.TrackPlayLikeDis>
+                {/* <S.TrackPlayLikeDis>
                   <S.TrackPlayLike>
                     <S.TrackPlayLikeSvg alt="like">
                       <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
@@ -188,7 +189,7 @@ export function AudioPlayer({ loadApp }) {
                       <use xlinkHref="img/icon/sprite.svg#icon-dislike"></use>
                     </S.TrackPlayDislikeSvg>
                   </S.TrackPlayDislike>
-                </S.TrackPlayLikeDis>
+                </S.TrackPlayLikeDis> */}
               </S.PlayerTrackPlay>
             </S.BarPlayer>
             <S.BarVolumeBlock>
