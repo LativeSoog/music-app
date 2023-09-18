@@ -1,8 +1,10 @@
 import {
+  CHANGE_FILTERED_PLAYLIST,
   IS_LOADING_APP,
   SET_ACTIVE_PLAYLIST,
   SET_CURRENT_PLAYLIST,
   SET_CURRENT_SONG,
+  SET_FILTER_PLAYLIST,
   SET_IS_COMPILATION,
   SET_IS_PLAYING,
 } from '../actions/type/audioplayer'
@@ -14,6 +16,11 @@ const initialState = {
   activePlaylist: {},
   currentSong: {},
   isCompilation: false,
+  filters: {
+    status: false,
+    searchNameTrack: '',
+  },
+  filteredPlaylist: {},
 }
 
 export default function audioPlayerReducer(state = initialState, action) {
@@ -53,6 +60,22 @@ export default function audioPlayerReducer(state = initialState, action) {
       return {
         ...state,
         isCompilation: action.payload,
+        filters: {
+          status: false,
+          searchNameTrack: '',
+        },
+      }
+
+    case SET_FILTER_PLAYLIST:
+      return {
+        ...state,
+        filters: action.payload,
+      }
+
+    case CHANGE_FILTERED_PLAYLIST:
+      return {
+        ...state,
+        filteredPlaylist: action.payload,
       }
 
     default:

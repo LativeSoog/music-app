@@ -16,3 +16,9 @@ export const audioPlayerIsPlaying = (store) =>
 
 export const audioPlayerSetIsCompilation = (store) =>
   audioPlayerSelector(store)?.isCompilation
+
+export const audioPlayerSetIsFilter = (store) =>
+  audioPlayerSelector(store)?.filters
+
+export const audioPlayerChangedFilteredPlaylist = (store) =>
+  audioPlayerSelector(store)?.filteredPlaylist
