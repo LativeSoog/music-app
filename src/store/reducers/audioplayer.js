@@ -19,7 +19,7 @@ const initialState = {
   filters: {
     status: false,
     authors: '',
-    years: '',
+    years: false,
     genre: '',
     searchNameTrack: '',
   },

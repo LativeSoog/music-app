@@ -63,11 +63,11 @@ export function TrackList() {
         ]
       }
 
-      if (stateFilters.years === 'Более новые') {
+      if (stateFilters.years === 'new') {
         newFilteredPlaylist.sort((a, b) =>
           sortDate(b.release_date, a.release_date),
         )
-      } else if (stateFilters === 'Более старые') {
+      } else if (stateFilters === 'old') {
         newFilteredPlaylist.sort((a, b) =>
           sortDate(a.release_date, b.release_date),
         )
@@ -82,6 +82,7 @@ export function TrackList() {
           ),
         ]
       }
+      console.log(newFilteredPlaylist)
       dispatch(changeFilteredPlaylist(newFilteredPlaylist))
     }
   }, [stateFilters, trackList])

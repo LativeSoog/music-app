@@ -59,12 +59,41 @@ const AuthorsTrack = ({ authorList }) => {
   )
 }
 
-const YearTrack = () => {
+const YearTrack = ({ setFilter }) => {
+  const dispatch = useDispatch()
+  const stateFilters = useSelector(audioPlayerSetIsFilter)
+
+  const filterYear = (userFilter) => {
+    dispatch(setFilterPlaylist({ ...stateFilters, years: userFilter }))
+    setFilter(null)
+  }
+
   return (
     <S.FilterContent>
       <S.FilterBox>
-        <S.FilterBoxItem>Более новые</S.FilterBoxItem>
-        <S.FilterBoxItem>Более старые</S.FilterBoxItem>
+        {stateFilters.years === false ? (
+          <S.FilterBoxItemActive>По умолчанию</S.FilterBoxItemActive>
+        ) : (
+          <S.FilterBoxItem onClick={() => filterYear(false)}>
+            По умолчанию
+          </S.FilterBoxItem>
+        )}
+
+        {stateFilters.years === 'new' ? (
+          <S.FilterBoxItemActive>Более новые</S.FilterBoxItemActive>
+        ) : (
+          <S.FilterBoxItem onClick={() => filterYear('new')}>
+            Более новые
+          </S.FilterBoxItem>
+        )}
+
+        {stateFilters.years === 'old' ? (
+          <S.FilterBoxItemActive>Более старые</S.FilterBoxItemActive>
+        ) : (
+          <S.FilterBoxItem onClick={() => filterYear('old')}>
+            Более старые
+          </S.FilterBoxItem>
+        )}
       </S.FilterBox>
     </S.FilterContent>
   )
@@ -125,7 +154,6 @@ const GenreTrack = ({ genreList }) => {
 }
 
 export function FilterTrack() {
-  const dispatch = useDispatch()
   const stateFilters = useSelector(audioPlayerSetIsFilter)
   const { data: playlistInfo } = useGetAllTrackQuery()
   const [filterAuthors, setFilterAuthors] = useState()
@@ -165,7 +193,7 @@ export function FilterTrack() {
         }}
       >
         году выпуска
-        {filter === 'year' && <YearTrack />}
+        {filter === 'year' && <YearTrack setFilter={setFilter} />}
       </S.FilterButton>
 
       <S.FilterButton
