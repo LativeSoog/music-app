@@ -13,10 +13,7 @@ import {
 } from '../../services/audioplayer.js'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import {
-  changeFilteredPlaylist,
-  selectCurrentSong,
-} from '../../store/actions/creators/audioplayer.js'
+import { changeFilteredPlaylist } from '../../store/actions/creators/audioplayer.js'
 import { sortDate } from '../../constants.js'
 
 const StyledContentPlaylist = styled.div`

@@ -11,7 +11,6 @@ import {
   selectCurrentSong,
   setIsPlaying,
 } from '../../store/actions/creators/audioplayer.js'
-import { UserContext, useUserContext } from '../../contexts/userContext.jsx'
 import {
   useAddedFavoriteTrackMutation,
   useDeleteFavoriteTrackMutation,
@@ -19,7 +18,6 @@ import {
 import { useNavigate } from 'react-router-dom'
 
 export function AudioPlayer({ loadApp }) {
-  const user = useUserContext(UserContext)
   const navigate = useNavigate()
   const audioRef = useRef(null)
   const [isRepeat, setIsRepeat] = useState(false)
