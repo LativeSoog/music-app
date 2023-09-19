@@ -65,6 +65,9 @@ export default function audioPlayerReducer(state = initialState, action) {
         isCompilation: action.payload,
         filters: {
           status: false,
+          authors: '',
+          years: false,
+          genre: '',
           searchNameTrack: '',
         },
       }

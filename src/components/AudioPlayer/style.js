@@ -309,6 +309,15 @@ export const TrackPlayLikeSvg = styled.svg`
   stroke: #696969;
 `
 
+export const TrackPlayLikedSvg = styled.svg`
+  width: 14px;
+  height: 12px;
+  fill: transparent;
+  stroke: #696969;
+  fill: #b672ff;
+  stroke: #b672ff;
+`
+
 export const TrackPlayDislike = styled.div`
   margin-left: 28.5px;
 

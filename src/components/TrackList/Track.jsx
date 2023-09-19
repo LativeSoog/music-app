@@ -70,8 +70,9 @@ export function Track({ title, titleSpan, link, author, album, time, track }) {
         onClick={() => {
           dispatch(selectCurrentSong(track))
           {
-            activePlaylist !== trackList &&
-              isCompilation ? dispatch(setActivePlayList(trackListCompilation.items)) : dispatch(setActivePlayList(trackList))
+            activePlaylist !== trackList && isCompilation
+              ? dispatch(setActivePlayList(trackListCompilation.items))
+              : dispatch(setActivePlayList(trackList))
           }
         }}
       >

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   audioPlayerChangedFilteredPlaylist,
   audioPlayerCurrentPlaylist,
+  audioPlayerCurrentSong,
   audioPlayerSetIsFilter,
 } from '../../store/selectors/audioplayer.js'
 import {
@@ -14,7 +15,7 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   changeFilteredPlaylist,
-  setFilterPlaylist,
+  selectCurrentSong,
 } from '../../store/actions/creators/audioplayer.js'
 import { sortDate } from '../../constants.js'
 
@@ -29,6 +30,7 @@ export function TrackList() {
   const navigate = useNavigate()
 
   const currentPlaylist = useSelector(audioPlayerCurrentPlaylist)
+  const currentSong = useSelector(audioPlayerCurrentSong)
   const stateFilters = useSelector(audioPlayerSetIsFilter)
   const filteredPlaylist = useSelector(audioPlayerChangedFilteredPlaylist)
 
@@ -64,7 +66,7 @@ export function TrackList() {
       }
 
       if (stateFilters.years === 'new') {
-        newFilteredPlaylist.sort((a, b) =>
+        newFilteredPlaylist = newFilteredPlaylist.sort((a, b) =>
           sortDate(b.release_date, a.release_date),
         )
       } else if (stateFilters === 'old') {
@@ -82,7 +84,6 @@ export function TrackList() {
           ),
         ]
       }
-      console.log(newFilteredPlaylist)
       dispatch(changeFilteredPlaylist(newFilteredPlaylist))
     }
   }, [stateFilters, trackList])

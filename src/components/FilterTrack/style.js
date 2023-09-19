@@ -97,10 +97,6 @@ export const FilterButton = styled.div`
   &:hover {
     ${btnTextHoverMixin}
   }
-
-  &:active {
-    ${btnTextActiveMixin}
-  }
 `
 
 export const FilterCounter = styled.div`

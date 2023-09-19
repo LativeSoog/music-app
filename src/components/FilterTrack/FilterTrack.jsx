@@ -64,7 +64,9 @@ const YearTrack = ({ setFilter }) => {
   const stateFilters = useSelector(audioPlayerSetIsFilter)
 
   const filterYear = (userFilter) => {
-    dispatch(setFilterPlaylist({ ...stateFilters, years: userFilter }))
+    dispatch(
+      setFilterPlaylist({ ...stateFilters, status: true, years: userFilter }),
+    )
     setFilter(null)
   }
 
@@ -176,18 +178,20 @@ export function FilterTrack() {
     <S.CenterBlockFilter>
       <S.FilterTitle>Искать по:</S.FilterTitle>
       <S.FilterButton
+        $active={filter === 'author' ? true : false}
         onClick={(e) => {
           filterButton(e, 'author')
         }}
       >
         исполнителю
-        {stateFilters.authors.length > 0 && (
-          <S.FilterCounter>{stateFilters?.authors.length}</S.FilterCounter>
+        {stateFilters.authors?.length > 0 && (
+          <S.FilterCounter>{stateFilters.authors.length}</S.FilterCounter>
         )}
         {filter === 'author' && <AuthorsTrack authorList={filterAuthors} />}
       </S.FilterButton>
 
       <S.FilterButton
+        $active={filter === 'year' ? true : false}
         onClick={(e) => {
           filterButton(e, 'year')
         }}
@@ -197,12 +201,13 @@ export function FilterTrack() {
       </S.FilterButton>
 
       <S.FilterButton
+        $active={filter === 'genre' ? true : false}
         onClick={(e) => {
           filterButton(e, 'genre')
         }}
       >
         жанру
-        {stateFilters.genre.length > 0 && (
+        {stateFilters.genre?.length > 0 && (
           <S.FilterCounter>{stateFilters?.genre.length}</S.FilterCounter>
         )}
         {filter === 'genre' && <GenreTrack genreList={filterGenre} />}

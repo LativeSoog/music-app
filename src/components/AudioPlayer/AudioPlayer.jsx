@@ -3,7 +3,6 @@ import * as S from './style.js'
 import { ProgressBar } from './ProgressBar.jsx'
 import { useDispatch, useSelector } from 'react-redux'
 import {
-  audioPlayerCurrentPlaylist,
   audioPlayerCurrentSong,
   audioPlayerIsPlaying,
   audioPlayerSetActivePlaylist,
@@ -12,8 +11,16 @@ import {
   selectCurrentSong,
   setIsPlaying,
 } from '../../store/actions/creators/audioplayer.js'
+import { UserContext, useUserContext } from '../../contexts/userContext.jsx'
+import {
+  useAddedFavoriteTrackMutation,
+  useDeleteFavoriteTrackMutation,
+} from '../../services/audioplayer.js'
+import { useNavigate } from 'react-router-dom'
 
 export function AudioPlayer({ loadApp }) {
+  const user = useUserContext(UserContext)
+  const navigate = useNavigate()
   const audioRef = useRef(null)
   const [isRepeat, setIsRepeat] = useState(false)
   const [isShuffle, setIsShuffle] = useState(false)
@@ -103,6 +110,28 @@ export function AudioPlayer({ loadApp }) {
     }
   }
 
+  const handleLike = (e, id) => {
+    e.stopPropagation()
+    addTrackToFavorite(id)
+  }
+
+  const handleDislike = (e, id) => {
+    e.stopPropagation()
+    deleteTrackToFavorite(id)
+  }
+
+  const [addTrackToFavorite, { error: errorAddFavorite }] =
+    useAddedFavoriteTrackMutation()
+  const [deleteTrackToFavorite, { error: errorDelFavorite }] =
+    useDeleteFavoriteTrackMutation()
+
+  useEffect(() => {
+    if (errorAddFavorite?.status === 401 || errorDelFavorite?.status === 401) {
+      window.localStorage.removeItem('user')
+      navigate('/login')
+    }
+  }, [errorAddFavorite, errorDelFavorite])
+
   return (
     currentSong.id && (
       <S.Bar>
@@ -178,18 +207,22 @@ export function AudioPlayer({ loadApp }) {
                   <AudioPlayerLoading />
                 )}
 
-                {/* <S.TrackPlayLikeDis>
-                  <S.TrackPlayLike>
+                <S.TrackPlayLikeDis>
+                  <S.TrackPlayLike
+                    onClick={(e) => handleLike(e, currentSong.id)}
+                  >
                     <S.TrackPlayLikeSvg alt="like">
                       <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
                     </S.TrackPlayLikeSvg>
                   </S.TrackPlayLike>
-                  <S.TrackPlayDislike>
+                  <S.TrackPlayDislike
+                    onClick={(e) => handleDislike(e, currentSong.id)}
+                  >
                     <S.TrackPlayDislikeSvg alt="dislike">
                       <use xlinkHref="img/icon/sprite.svg#icon-dislike"></use>
                     </S.TrackPlayDislikeSvg>
                   </S.TrackPlayDislike>
-                </S.TrackPlayLikeDis> */}
+                </S.TrackPlayLikeDis>
               </S.PlayerTrackPlay>
             </S.BarPlayer>
             <S.BarVolumeBlock>
