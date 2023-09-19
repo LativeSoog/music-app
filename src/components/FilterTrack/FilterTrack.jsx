@@ -1,22 +1,59 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import * as S from './style.js'
+import { useDispatch, useSelector } from 'react-redux'
+import { audioPlayerSetIsFilter } from '../../store/selectors/audioplayer.js'
+import { setFilterPlaylist } from '../../store/actions/creators/audioplayer.js'
+import { useGetAllTrackQuery } from '../../services/audioplayer.js'
 
-const AuthorsTrack = () => {
+const AuthorsTrack = ({ authorList }) => {
+  const dispatch = useDispatch()
+  const stateFilters = useSelector(audioPlayerSetIsFilter)
+
+  const filterAddAuthors = (author) => {
+    const addedAuthor = {
+      ...stateFilters,
+      status: true,
+      authors: [...stateFilters.authors, author],
+    }
+    dispatch(setFilterPlaylist(addedAuthor))
+  }
+
+  const filterDelAuthors = (author) => {
+    const currentAuthors = [...stateFilters.authors]
+    const authorIndex = currentAuthors.indexOf(author)
+
+    currentAuthors.splice(authorIndex, 1)
+
+    const deletedAuthor = {
+      ...stateFilters,
+      status: true,
+      authors: [...currentAuthors],
+    }
+    dispatch(setFilterPlaylist(deletedAuthor))
+  }
+
+  const uniqueAuthors = [...new Set(authorList)]
+
   return (
     <S.FilterContent>
       <S.FilterBox>
-        <S.FilterBoxItem>Nero</S.FilterBoxItem>
-        <S.FilterBoxItem>Dynoro, Outwork, Mr. Gee</S.FilterBoxItem>
-        <S.FilterBoxItem>Ali Bakgor</S.FilterBoxItem>
-        <S.FilterBoxItem>Стоункат, Psychopath</S.FilterBoxItem>
-        <S.FilterBoxItem>Jaded, Will Clarke, AR/CO</S.FilterBoxItem>
-        <S.FilterBoxItem>Blue Foundation, Zeds Dead</S.FilterBoxItem>
-        <S.FilterBoxItem>
-          HYBIT, Mr. Black, Offer Nissim, Hi Profile
-        </S.FilterBoxItem>
-        <S.FilterBoxItem>minthaze</S.FilterBoxItem>
-        <S.FilterBoxItem>Calvin Harris, Disciples</S.FilterBoxItem>
-        <S.FilterBoxItem>Tom Boxer</S.FilterBoxItem>
+        {uniqueAuthors.map((author) =>
+          !stateFilters.authors.includes(author) ? (
+            <S.FilterBoxItem
+              key={author.id}
+              onClick={() => filterAddAuthors(author)}
+            >
+              {author}
+            </S.FilterBoxItem>
+          ) : (
+            <S.FilterBoxItemActive
+              key={author.id}
+              onClick={() => filterDelAuthors(author)}
+            >
+              {author}
+            </S.FilterBoxItemActive>
+          ),
+        )}
       </S.FilterBox>
     </S.FilterContent>
   )
@@ -33,24 +70,76 @@ const YearTrack = () => {
   )
 }
 
-const GenreTrack = () => {
+const GenreTrack = ({ genreList }) => {
+  const dispatch = useDispatch()
+  const stateFilters = useSelector(audioPlayerSetIsFilter)
+
+  const filterAddGenre = (genre) => {
+    const addedGenre = {
+      ...stateFilters,
+      status: true,
+      genre: [...stateFilters.genre, genre],
+    }
+    dispatch(setFilterPlaylist(addedGenre))
+  }
+
+  const filterDelGenre = (genre) => {
+    const currentGenre = [...stateFilters.genre]
+    const genreIndex = currentGenre.indexOf(genre)
+
+    currentGenre.splice(genreIndex, 1)
+
+    const deletedGenre = {
+      ...stateFilters,
+      status: true,
+      genre: [...currentGenre],
+    }
+    dispatch(setFilterPlaylist(deletedGenre))
+  }
+
+  const uniqueGenre = [...new Set(genreList)]
+
   return (
     <S.FilterContent>
       <S.FilterBox>
-        <S.FilterBoxItem>Рок</S.FilterBoxItem>
-        <S.FilterBoxItem>Хип-Хоп</S.FilterBoxItem>
-        <S.FilterBoxItem>Поп-музыка</S.FilterBoxItem>
-        <S.FilterBoxItem>Техно</S.FilterBoxItem>
-        <S.FilterBoxItem>Инди</S.FilterBoxItem>
-        <S.FilterBoxItem>Классическая</S.FilterBoxItem>
+        {uniqueGenre.map((genre) =>
+          !stateFilters.genre.includes(genre) ? (
+            <S.FilterBoxItem
+              key={genre.id}
+              onClick={() => filterAddGenre(genre)}
+            >
+              {genre}
+            </S.FilterBoxItem>
+          ) : (
+            <S.FilterBoxItemActive
+              key={genre.id}
+              onClick={() => filterDelGenre(genre)}
+            >
+              {genre}
+            </S.FilterBoxItemActive>
+          ),
+        )}
       </S.FilterBox>
     </S.FilterContent>
   )
 }
 
-export function SearchTrack(props) {
+export function FilterTrack() {
+  const dispatch = useDispatch()
+  const stateFilters = useSelector(audioPlayerSetIsFilter)
+  const { data: playlistInfo } = useGetAllTrackQuery()
+  const [filterAuthors, setFilterAuthors] = useState()
+  const [filterGenre, setFilterGenre] = useState()
+
+  useEffect(() => {
+    setFilterAuthors(playlistInfo?.map((track) => track.author))
+    setFilterGenre(playlistInfo?.map((track) => track.genre))
+  }, [playlistInfo])
+
   const [filter, setFilter] = useState(null)
-  const filterButton = (userFilter) => {
+
+  const filterButton = (e, userFilter) => {
+    e.stopPropagation()
     if (filter === userFilter) {
       setFilter(null)
     } else setFilter(userFilter)
@@ -59,17 +148,20 @@ export function SearchTrack(props) {
     <S.CenterBlockFilter>
       <S.FilterTitle>Искать по:</S.FilterTitle>
       <S.FilterButton
-        onClick={() => {
-          filterButton('author')
+        onClick={(e) => {
+          filterButton(e, 'author')
         }}
       >
         исполнителю
-        {filter === 'author' && <AuthorsTrack />}
+        {stateFilters.authors.length > 0 && (
+          <S.FilterCounter>{stateFilters?.authors.length}</S.FilterCounter>
+        )}
+        {filter === 'author' && <AuthorsTrack authorList={filterAuthors} />}
       </S.FilterButton>
 
       <S.FilterButton
-        onClick={() => {
-          filterButton('year')
+        onClick={(e) => {
+          filterButton(e, 'year')
         }}
       >
         году выпуска
@@ -77,12 +169,15 @@ export function SearchTrack(props) {
       </S.FilterButton>
 
       <S.FilterButton
-        onClick={() => {
-          filterButton('genre')
+        onClick={(e) => {
+          filterButton(e, 'genre')
         }}
       >
         жанру
-        {filter === 'genre' && <GenreTrack />}
+        {stateFilters.genre.length > 0 && (
+          <S.FilterCounter>{stateFilters?.genre.length}</S.FilterCounter>
+        )}
+        {filter === 'genre' && <GenreTrack genreList={filterGenre} />}
       </S.FilterButton>
     </S.CenterBlockFilter>
   )

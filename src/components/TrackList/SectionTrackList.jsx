@@ -1,6 +1,6 @@
 import { TrackList, TrackListLoading } from './Tracklist.jsx'
 import { SearchLine } from './SearchLine.jsx'
-import { SearchTrack } from '../FilterTrack/FilterTrack.jsx'
+import { FilterTrack } from '../FilterTrack/FilterTrack.jsx'
 import * as S from './style.js'
 import { useSelector } from 'react-redux'
 import { audioPlayerCurrentPlaylist } from '../../store/selectors/audioplayer.js'
@@ -16,7 +16,7 @@ export function SectionTrackList({ loadApp, isErrorApp }) {
       ) : (
         <S.CenterBlockH2>Треки</S.CenterBlockH2>
       )}
-      {currentPlaylist !== 1 && <SearchTrack />}
+      {currentPlaylist !== 1 && <FilterTrack />}
       <S.CenterBlockContent>
         <S.ContentTitle>
           <S.ContentCol1>Трек</S.ContentCol1>

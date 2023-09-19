@@ -16,6 +16,7 @@ import {
   changeFilteredPlaylist,
   setFilterPlaylist,
 } from '../../store/actions/creators/audioplayer.js'
+import { sortDate } from '../../constants.js'
 
 const StyledContentPlaylist = styled.div`
   display: flex;
@@ -45,6 +46,33 @@ export function TrackList() {
   useEffect(() => {
     if (trackList) {
       let newFilteredPlaylist = [...trackList]
+
+      if (stateFilters.authors.length) {
+        newFilteredPlaylist = [
+          ...newFilteredPlaylist.filter((track) =>
+            stateFilters.authors.includes(track.author),
+          ),
+        ]
+      }
+
+      if (stateFilters.genre.length) {
+        newFilteredPlaylist = [
+          ...newFilteredPlaylist.filter((track) =>
+            stateFilters.genre.includes(track.genre),
+          ),
+        ]
+      }
+
+      if (stateFilters.years === 'Более новые') {
+        newFilteredPlaylist.sort((a, b) =>
+          sortDate(b.release_date, a.release_date),
+        )
+      } else if (stateFilters === 'Более старые') {
+        newFilteredPlaylist.sort((a, b) =>
+          sortDate(a.release_date, b.release_date),
+        )
+      }
+
       if (stateFilters.searchNameTrack.length) {
         newFilteredPlaylist = [
           ...trackList.filter((track) =>

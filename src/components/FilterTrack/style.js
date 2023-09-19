@@ -32,6 +32,8 @@ export const FilterBox = styled.div`
   margin: 34px;
 `
 
+export const FilterBoxAuthors = styled.div``
+
 export const FilterBoxItem = styled.p`
   font-size: 20px;
   font-weight: 400;
@@ -43,6 +45,14 @@ export const FilterBoxItem = styled.p`
     color: #b672ff;
   }
 `
+export const FilterBoxItemActive = styled.p`
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #ad61ff;
+  text-decoration: underline;
+`
+
 export const CenterBlockFilter = styled.div`
   display: flex;
   flex-direction: row;
@@ -73,6 +83,17 @@ export const FilterButton = styled.div`
     margin-right: 10px;
   }
 
+  ${(props) =>
+    props.$active &&
+    `
+        color: #b672ff;
+        border: 1px solid #9a48f1;
+        &:hover {
+            color: #b672ff !important;
+            border: 1px solid #9a48f1 !important;
+        }
+        `}
+
   &:hover {
     ${btnTextHoverMixin}
   }
@@ -80,4 +101,22 @@ export const FilterButton = styled.div`
   &:active {
     ${btnTextActiveMixin}
   }
+`
+
+export const FilterCounter = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #9a48f1;
+  right: -8px;
+  top: -9px;
+  color: #fff;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
 `

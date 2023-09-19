@@ -18,6 +18,9 @@ const initialState = {
   isCompilation: false,
   filters: {
     status: false,
+    authors: '',
+    years: '',
+    genre: '',
     searchNameTrack: '',
   },
   filteredPlaylist: {},
