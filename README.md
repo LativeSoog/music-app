@@ -1,75 +1,75 @@
+# Стек технологий
+- JavaScript
+- React
+- Redux
+- RTQ
+- Styled Components
+
 # Оценка выполнения работы
-HW #8 (Context) - Планируемое время: 10 часов. Фактическое время: 11,7 часов. \
-HW #9 (Redux) - Планируемое время: 12 часов. Фактическое время: 14.2 часа. \
-HW #10 (RTK QUERY) - Планируемое время: 10 часов. Фактическое время: 12.7 часов.
+## HW #8 (Context)
+Планируемое время: 10 часов. Фактическое время: 11,7 часов.
+## HW #9 (Redux)
+Планируемое время: 12 часов. Фактическое время: 14.2 часа.
+## HW #10 (RTK QUERY) 
+Планируемое время: 10 часов. Фактическое время: 12.7 часов.
+## Final Work
+Планируемое время: 12 часов. Фактическое время: 19 часов.
 
-# Getting Started with Create React App
+# Финальный чек-лист проверки приложения
+##### 1. Работает вход, выход и регистрация
+-	Кнопка «Зарегистрироваться» открывает окно с полями регистрации.
+-	Если пользователь с указанным именем/почтой зарегистрирован, отображается соответствующая ошибка.
+-	Если одно из полей не заполнено, отображается ошибка с указанием поля.
+-	Если поле «Пароль» менее 8-ми символов, отображается ошибка.
+-	Если поля корректно заполнены, кнопка «Зарегистрироваться» делает запрос к серверу, регистрирует пользователя и перенаправляет на страницу входа.
+-	Кнопка «Войти» сообщит об ошибке, если не заполнено одно или несколько полей.
+-	Если указанные почта или пароль неверны, появится сообщение о ненайденном пользователе.
+-	Если логин и пароль введены верно, то при нажатии на кнопку «Войти» отображается главная страница.
+-	Кнопка «Выйти» в меню и значок выхода в Sidebar разлогинивают пользователя и перенаправляют на страницу логина.
+-	Неавторизированному пользователю доступны только страницы логина и регистрации
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+##### 2. Работает страница "Главное"
+-	На главной отображается общий список треков
+-	Сверху, в правой части отображается имя пользователя.
+-	При загрузке страницы появляются «скелетоны».
 
-## Available Scripts
+##### 3. Работает поиск и фильтрация на странице "Главное"
+-	Строка поиск отображается вверху страницы.
+-	При введении символов, отображаются треки, содержащие в названии указанные символы.
+-	Фильтры «исполнитель» и «жанр» фильтрует треки, можно выбрать множество фильтров и совмещать их.
+-	Сортировка по году выпуска сортирует треки.
+-	При переходе в подборки, фильтрация и сортировка сбрасывается.
 
-In the project directory, you can run:
+##### 4. Работает механика лайков (снять и поставить лайк) и страница "Мой плейлист"
+-	При нажатии на иконку сердечка в списке треков она закрашивается, трек добавляется в «Мой плейлист»
+-	При нажатии на закрашенную иконку сердечка, она становится прозрачной, трек удаляется из «Мой плейлист».
+-	При нажатии на иконки сердечек  в аудиобаре (лайк/дизлайк), треки добавляются/удаляются в/из «Мой плейлист», в списке треков меняется закрашенность сердца напротив трека.
 
-### `npm start`
+##### 5. Работают переходы на страницы с подборками и сами страницы с подборками, при переходах между страницами музыка не прекращает играть
+-	Внутри подборки отображается название, блок с фильтрацией и сортировкой скрыты.
+-	Механика лайков работает аналогично другим страницам.
+-	Каждая подборка имеет свой уникальный id.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+##### 6. На всех страницах с треками можно выбрать трек и начнется воспроизведение трека
+-	Проигрывание трека продолжается, если пользователь перешёл на другую страницу
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+##### 7. После того как заканчивается текущий трек, включается следующий трек из текущего плейлиста
+-	При переходе в другой плейлист, следующий трек будет включаться из предыдущего, пока пользователь не выберет в новом плейлисте трек.
 
-### `npm test`
+##### 8. Работает ручное переключение треков назад и вперед кнопками
+-	Кнопки «Вперёд», «Назад» переключает треки в рамках изначального плейлиста, где пользователь запустил воспроизведение
+-	Если воспроизведение было поставлено на паузу, а затем нажата кнопка «Вперед» или «Назад», то запускается следующий/предыдущий трек.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+##### 9. Работает функция "перемешать треки"
+-	Треки воспроизводятся в случайном порядке при окончании текущего.
+-	При включённой функции «Перемешать треки», кнопки «Вперед» и «Назад» воспроизводят случайные треки.
+-	Кнопка «Перемешать треки» становится активной, светлой.
 
-### `npm run build`
+##### 10. Работает управление воспроизведением: play, pause, громкость и зацикливание
+-	Кнопка Pause останавливает трек на текущей секунде воспроизведения.
+-	Кнопка Play запускает трек с места, где он был поставлен на паузу.
+-	Ползунок громкости регулируется, громкость изменяется.
+-	Кнопка «Повтор» зацикливает трек, по окончанию он автоматически воспроизводится вновь.
+-	Если кнопка «Повтор» активна, она становится светлой.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
