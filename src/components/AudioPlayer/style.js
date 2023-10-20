@@ -19,7 +19,7 @@ const btnIconActiveMixin = css`
 `
 
 export const Bar = styled.div`
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -307,6 +307,15 @@ export const TrackPlayLikeSvg = styled.svg`
   height: 12px;
   fill: transparent;
   stroke: #696969;
+`
+
+export const TrackPlayLikedSvg = styled.svg`
+  width: 14px;
+  height: 12px;
+  fill: transparent;
+  stroke: #696969;
+  fill: #b672ff;
+  stroke: #b672ff;
 `
 
 export const TrackPlayDislike = styled.div`

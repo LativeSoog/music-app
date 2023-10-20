@@ -9,22 +9,26 @@ import {
   audioPlayerCurrentSong,
   audioPlayerIsPlaying,
   audioPlayerSetActivePlaylist,
+  audioPlayerSetIsCompilation,
 } from '../../store/selectors/audioplayer.js'
 import {
   useAddedFavoriteTrackMutation,
   useDeleteFavoriteTrackMutation,
   useGetAllTrackQuery,
+  useGetCompilationIdQuery,
   useGetFavoriteTrackQuery,
 } from '../../services/audioplayer.js'
 import { UserContext, useUserContext } from '../../contexts/userContext.jsx'
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 export function Track({ title, titleSpan, link, author, album, time, track }) {
   const currentSong = useSelector(audioPlayerCurrentSong)
   const isPlaying = useSelector(audioPlayerIsPlaying)
   const currentPlaylist = useSelector(audioPlayerCurrentPlaylist)
   const activePlaylist = useSelector(audioPlayerSetActivePlaylist)
+  const isCompilation = useSelector(audioPlayerSetIsCompilation)
+  const params = useParams()
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -33,6 +37,10 @@ export function Track({ title, titleSpan, link, author, album, time, track }) {
   const { data: trackList } = currentPlaylist
     ? useGetFavoriteTrackQuery()
     : useGetAllTrackQuery()
+
+  const { data: trackListCompilation } = isCompilation
+    ? useGetCompilationIdQuery(Number(params.id))
+    : ''
 
   const handleLike = (e, id) => {
     e.stopPropagation()
@@ -62,8 +70,9 @@ export function Track({ title, titleSpan, link, author, album, time, track }) {
         onClick={() => {
           dispatch(selectCurrentSong(track))
           {
-            activePlaylist !== trackList &&
-              dispatch(setActivePlayList(trackList))
+            activePlaylist !== trackList && isCompilation
+              ? dispatch(setActivePlayList(trackListCompilation.items))
+              : dispatch(setActivePlayList(trackList))
           }
         }}
       >
@@ -76,7 +85,7 @@ export function Track({ title, titleSpan, link, author, album, time, track }) {
             )}
 
             <S.TrackTitleSvg alt="music">
-              <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
+              <use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
             </S.TrackTitleSvg>
           </S.TrackTitleImage>
           <S.TrackTitleText>
@@ -100,7 +109,7 @@ export function Track({ title, titleSpan, link, author, album, time, track }) {
                   handleDislike(e, track.id)
                 }}
               >
-                <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
+                <use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
               </S.TrackTimeSvgLiked>
             ) : (
               <S.TrackTimeSvg
@@ -109,7 +118,7 @@ export function Track({ title, titleSpan, link, author, album, time, track }) {
                   handleLike(e, track.id)
                 }}
               >
-                <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
+                <use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
               </S.TrackTimeSvg>
             )}
             <S.TrackTimeText>{time}</S.TrackTimeText>
@@ -123,7 +132,7 @@ export function Track({ title, titleSpan, link, author, album, time, track }) {
                 handleDislike(e, track.id)
               }}
             >
-              <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
+              <use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
             </S.TrackTimeSvgLiked>
             <S.TrackTimeText>{time}</S.TrackTimeText>
           </S.TrackTime>

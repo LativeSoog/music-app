@@ -1,19 +1,6 @@
 const host = 'https://skypro-music-api.skyeng.tech/'
 let catalog = ''
 
-export const getAllTrack = async () => {
-  catalog = 'catalog/track/all/'
-  return fetch(host + catalog, {
-    method: 'GET',
-  }).then(async (response) => {
-    if (!response.ok) {
-      throw new Error('Ошибка сервера')
-    } else {
-      return await response.json()
-    }
-  })
-}
-
 export const registrationUsersApi = async ({ username, email, password }) => {
   catalog = 'user/signup/'
 

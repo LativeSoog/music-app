@@ -2,17 +2,17 @@ export const CATEGORIES = [
   {
     id: 1,
     name: 'Плейлист дня',
-    urlImg: 'img/playlist01.png',
+    urlImg: '/img/playlist01.png',
   },
   {
     id: 2,
     name: '100 танцевальных хитов',
-    urlImg: 'img/playlist02.png',
+    urlImg: '/img/playlist02.png',
   },
   {
     id: 3,
     name: 'Инди-заряд',
-    urlImg: 'img/playlist03.png',
+    urlImg: '/img/playlist03.png',
   },
 ]
 
@@ -29,4 +29,17 @@ export const formatTime = (second) => {
   }
 
   return `${minutes}:${seconds}`
+}
+
+export const sortDate = (a, b) => {
+  const dateA = new Date(a)
+  const dateB = new Date(b)
+
+  if (dateA < dateB) {
+    return -1
+  } else if (dateA > dateB) {
+    return 1
+  } else {
+    return 0
+  }
 }

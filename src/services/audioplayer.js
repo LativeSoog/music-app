@@ -50,6 +50,20 @@ export const audioPlayerApi = createApi({
       }),
       invalidatesTags: [DATA_TAG],
     }),
+    getAllCompilation: build.query({
+      query: () => ({
+        url: '/catalog/selection/',
+        method: 'GET',
+      }),
+      providesTags: (result = []) => [DATA_TAG],
+    }),
+    getCompilationId: build.query({
+      query: (id) => ({
+        url: `/catalog/selection/${id}`,
+        method: 'GET',
+      }),
+      providesTags: (result = []) => [DATA_TAG],
+    }),
   }),
 })
 
@@ -58,4 +72,6 @@ export const {
   useGetFavoriteTrackQuery,
   useAddedFavoriteTrackMutation,
   useDeleteFavoriteTrackMutation,
+  useGetAllCompilationQuery,
+  useGetCompilationIdQuery,
 } = audioPlayerApi

@@ -1,20 +1,13 @@
 import { styled } from 'styled-components'
-import { Track, TrackLoading } from './Track.jsx'
+import { Track } from '../TrackList/Track.jsx'
+import { useGetCompilationIdQuery } from '../../services/audioplayer'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   audioPlayerChangedFilteredPlaylist,
-  audioPlayerCurrentPlaylist,
-  audioPlayerCurrentSong,
   audioPlayerSetIsFilter,
 } from '../../store/selectors/audioplayer.js'
-import {
-  useGetAllTrackQuery,
-  useGetFavoriteTrackQuery,
-} from '../../services/audioplayer.js'
-import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { changeFilteredPlaylist } from '../../store/actions/creators/audioplayer.js'
-import { sortDate } from '../../constants.js'
 
 const StyledContentPlaylist = styled.div`
   display: flex;
@@ -22,56 +15,17 @@ const StyledContentPlaylist = styled.div`
   overflow-y: auto;
 `
 
-export function TrackList() {
+export function CategoryTrackList({ params }) {
   const dispatch = useDispatch()
-  const navigate = useNavigate()
-
-  const currentPlaylist = useSelector(audioPlayerCurrentPlaylist)
-  const currentSong = useSelector(audioPlayerCurrentSong)
+  const { data: currentCategory } = useGetCompilationIdQuery(Number(params.id))
   const stateFilters = useSelector(audioPlayerSetIsFilter)
   const filteredPlaylist = useSelector(audioPlayerChangedFilteredPlaylist)
 
-  const { data: trackList, error: trackListError } = currentPlaylist
-    ? useGetFavoriteTrackQuery()
-    : useGetAllTrackQuery()
-
-  useEffect(() => {
-    if (trackListError?.status === 401) {
-      window.localStorage.removeItem('user')
-      navigate('/login')
-    }
-  }, [trackListError])
+  const trackList = currentCategory?.items
 
   useEffect(() => {
     if (trackList) {
       let newFilteredPlaylist = [...trackList]
-
-      if (stateFilters.authors.length) {
-        newFilteredPlaylist = [
-          ...newFilteredPlaylist.filter((track) =>
-            stateFilters.authors.includes(track.author),
-          ),
-        ]
-      }
-
-      if (stateFilters.genre.length) {
-        newFilteredPlaylist = [
-          ...newFilteredPlaylist.filter((track) =>
-            stateFilters.genre.includes(track.genre),
-          ),
-        ]
-      }
-
-      if (stateFilters.years === 'new') {
-        newFilteredPlaylist = newFilteredPlaylist.sort((a, b) =>
-          sortDate(b.release_date, a.release_date),
-        )
-      } else if (stateFilters === 'old') {
-        newFilteredPlaylist.sort((a, b) =>
-          sortDate(a.release_date, b.release_date),
-        )
-      }
-
       if (stateFilters.searchNameTrack.length) {
         newFilteredPlaylist = [
           ...trackList.filter((track) =>
@@ -88,7 +42,7 @@ export function TrackList() {
   return (
     <StyledContentPlaylist>
       {stateFilters.status
-        ? filteredPlaylist?.map((track) => {
+        ? filteredPlaylist.map((track) => {
             return (
               <Track
                 track={track}
@@ -106,7 +60,7 @@ export function TrackList() {
               />
             )
           })
-        : trackList?.map((track) => {
+        : currentCategory?.items?.map((track) => {
             return (
               <Track
                 track={track}
@@ -125,23 +79,6 @@ export function TrackList() {
             )
           })}
       {}
-    </StyledContentPlaylist>
-  )
-}
-
-export function TrackListLoading(props) {
-  return (
-    <StyledContentPlaylist>
-      <TrackLoading />
-      <TrackLoading />
-      <TrackLoading />
-      <TrackLoading />
-      <TrackLoading />
-      <TrackLoading />
-      <TrackLoading />
-      <TrackLoading />
-      <TrackLoading />
-      <TrackLoading />
     </StyledContentPlaylist>
   )
 }
