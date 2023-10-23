@@ -1,19 +1,19 @@
-# Стек технологий
+# Technology stack
 - JavaScript
 - React
 - Redux
 - RTQ
 - Styled Components
 
-# Оценка выполнения работы
-## HW #8 (Context)
-Планируемое время: 10 часов. Фактическое время: 11,7 часов.
-## HW #9 (Redux)
-Планируемое время: 12 часов. Фактическое время: 14.2 часа.
-## HW #10 (RTK QUERY) 
-Планируемое время: 10 часов. Фактическое время: 12.7 часов.
+# Evaluation of work performance
+## #8 (Context)
+Planned time: 10 hours. Actual time: 11.7 hours.
+## #9 (Redux)
+Planned time: 12 hours. Actual time: 14.2 hours.
+## #10 (RTK QUERY) 
+Planned time: 10 hours. Actual time: 12.7 hours.
 ## Final Work
-Планируемое время: 12 часов. Фактическое время: 19 часов.
+Planned time: 12 hours. Actual time: 19 hours.
 
 # Финальный чек-лист проверки приложения
 ##### 1. Работает вход, выход и регистрация
